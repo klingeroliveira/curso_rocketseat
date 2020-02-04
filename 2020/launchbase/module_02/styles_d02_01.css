@@ -3,6 +3,7 @@
 :root {
     --collor-font: white;
     --collor-font-hover: #69bd25;
+    --collor-background:  rgba(10, 10, 10, 0.2);
 }
 
 body{
@@ -12,7 +13,7 @@ body{
     color: var(--collor-font);
 }
 header{
-    background: rgba(197, 250, 6, 0.2);
+    background: var(--collor-background);
     padding: 30px;
 }
 .links{
@@ -72,4 +73,12 @@ header{
 .cards{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
+
+.card{
+    background-color: var(--collor-background);
+}
+
