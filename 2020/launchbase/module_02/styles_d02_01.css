@@ -108,3 +108,44 @@ header{
     padding: 5px 20px;
     border-radius: 20px;
 }
+
+/*=== MODAL ===*/
+
+.modal-overlay{
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal{
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    margin: 5vh auto;
+    position: relative;
+}
+
+.modal .close-modal{
+    color: black;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+/*=== MODAL.ACTIVE ===*/
+.modal-overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+iframe{
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 5px;
+}
