@@ -4,6 +4,7 @@
     --collor-font: white;
     --collor-font-hover: #69bd25;
     --collor-background:  rgba(10, 10, 10, 0.2);
+    --collor-background-details:  rgb(92, 91, 91);
 }
 
 body{
@@ -74,7 +75,7 @@ header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    max-width: 800px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
@@ -82,3 +83,28 @@ header{
     background-color: var(--collor-background);
 }
 
+.card__image-box{
+    margin-top: 24px;
+    text-align: center;
+}
+
+.card__title,
+.card__details{
+    padding: 24px;
+}
+
+.card__title{
+    text-align: justify;
+}
+
+.card__details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.card__price{
+    text-align: center;
+    background-color: var(--collor-background-details);
+    padding: 5px 20px;
+    border-radius: 20px;
+}
