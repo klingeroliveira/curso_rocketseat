@@ -5,6 +5,9 @@ const express = require('express') //carrega o pacote na variavel
 //4- instalar nunjuks (npm install nunjuks)
 const nunjucks = require('nunjucks') //motor de templates, views, reuso de código
 
+//
+const videos = require('./data')
+
 // 2- carregar em uma variável as funções do express
 const server = express() //carrega a função para a variavel servidor
 
@@ -12,20 +15,33 @@ const server = express() //carrega a função para a variavel servidor
 server.use(express.static('public'))
 
 //5- configurando o tipo de arquivo a ser renderizado e enviado ao servidor
-server.set("view engine", "html")
+server.set("view engine", "njk")
 
 //6- indicando pasta padrão para o server, com nunjucks
 nunjucks.configure("views", {
-    express: server
+    express: server,
+    autoescape: false
 })
 
 //7- rotas com função get para receber a requisição (request) e responder (response) a chamada da página
 server.get("/", function(req, res){
-    return res.render("about")
+    const about = {
+        avatar: "images/kligner.JPG",
+        name: "Klinger Oliveira",
+        role: "Estudante de Programação",
+        description: 'Estudante de programação, dando foco na <a href="https://rocketseat.com.br/" target="_blank">Rocketseat</a>.',
+
+        links:[
+            {name: "Github", url: "https://github.com/"},
+            {name: "Twitter", url: "https://twitter.com/"},
+            {name: "Linkedin", url: "https://br.linkedin.com/"}
+        ]
+    }
+    return res.render("about", {about})
 })
 
 server.get("/portifolio", function(req, res){
-    return res.render("portifolio")
+    return res.render("portifolio", { items: videos })
 })
 
 //3 - definindo a porta para execução doservidor 
