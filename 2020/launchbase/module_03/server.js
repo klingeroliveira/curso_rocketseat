@@ -20,7 +20,8 @@ server.set("view engine", "njk")
 //6- indicando pasta padrão para o server, com nunjucks
 nunjucks.configure("views", {
     express: server,
-    autoescape: false
+    autoescape: false,
+    noCache: true
 })
 
 //7- rotas com função get para receber a requisição (request) e responder (response) a chamada da página
@@ -42,6 +43,22 @@ server.get("/", function(req, res){
 
 server.get("/portifolio", function(req, res){
     return res.render("portifolio", { items: videos })
+})
+
+server.get("/video", function(req, res){
+    const id = req.query.id
+
+    const video = videos.find(function(video){
+        if (video.id == id){
+            return true
+        }
+    }) 
+
+    if (!video){
+        return res.send("Video not found!")
+    }
+
+    return res.render("video", {item: video})
 })
 
 //3 - definindo a porta para execução doservidor 

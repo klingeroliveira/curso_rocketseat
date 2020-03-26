@@ -19,6 +19,10 @@ server.get("/courses", function(req, res){
     return res.render("courses")
 })
 
+server.use(function(req,res){
+    res.status(404).render("not-found")
+})
+
 server.listen(5001, function(){
     console.log("Servidor em execução.")
 })
