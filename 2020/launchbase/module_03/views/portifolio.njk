@@ -14,7 +14,7 @@
     <section class="cards">
 
         {% for item in items%}
-        <div class="card" id="item.id">
+        <div class="card" id="{{item.id}}">
             <div class="card__image-container {{ 'featured-wrapper' if item.featured }}">
                 <img src="http://i3.ytimg.com/vi/{{item.id}}/maxresdefault.jpg" alt="Video Aula de {{item.title}}">
                 
@@ -34,18 +34,6 @@
         {% endfor %}
 
     </section>
-
-    <div class="modal-overlay">
-        <div class="modal">
-            <a class="close-modal">
-                <i class="material-icons">close</i>
-            </a>
-
-            <div class="modal-content">
-                <iframe src="" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
 
     <script src="/scripts.js"></script>
 

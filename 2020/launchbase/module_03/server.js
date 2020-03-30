@@ -1,5 +1,7 @@
 
-// 1 - instalar express - framework web para criação do servidor
+// 1 - criar arquivo server.js
+//criar arquivo packege.jcon (nom init -y)
+//ninstalar express - framework web para criação do servidor
 const express = require('express') //carrega o pacote na variavel
 
 //4- instalar nunjuks (npm install nunjuks)
@@ -27,7 +29,7 @@ nunjucks.configure("views", {
 //7- rotas com função get para receber a requisição (request) e responder (response) a chamada da página
 server.get("/", function(req, res){
     const about = {
-        avatar: "images/kligner.JPG",
+        avatar: "https://avatars1.githubusercontent.com/u/60447413?v=4",
         name: "Klinger Oliveira",
         role: "Estudante de Programação",
         description: 'Estudante de programação, dando foco na <a href="https://rocketseat.com.br/" target="_blank">Rocketseat</a>.',
@@ -49,9 +51,7 @@ server.get("/video", function(req, res){
     const id = req.query.id
 
     const video = videos.find(function(video){
-        if (video.id == id){
-            return true
-        }
+        return video.id == id
     }) 
 
     if (!video){
