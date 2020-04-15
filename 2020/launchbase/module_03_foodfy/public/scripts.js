@@ -1,6 +1,18 @@
 const modalOverlay = document.querySelector('.modal_overlay');
 const cards = document.querySelectorAll('.card');
 
+
+
+for (let card of cards) {
+    card.addEventListener("click", function(){
+        //const recipes = data; // Array de receitas carregadas do data.js
+        const recipeIndex = req.params.index;
+
+        console.log(recipeIndex);
+        //window.location.href = `/recipes/:index`;
+    })
+}
+ /*
 for (let card of cards){
     card.addEventListener("click", function(){
         const modalImg = card.getAttribute("id");
@@ -20,4 +32,4 @@ document.querySelector('.modal_close').addEventListener("click", function(){
     modalOverlay.querySelector("img").src = "";
     document.getElementById('p_modal_card_content').innerHTML = "";
     document.getElementById('p_modal_card_info').innerHTML = "";
-})
+})*/

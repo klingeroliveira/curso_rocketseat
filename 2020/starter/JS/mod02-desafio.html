@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="addDiv">Criar Quadrado</button>
+    <div id="divMaster"></div>
+
+    <input type="text" name="nome"> 
+    <button id="addNome">Adicionar</button>
+</body>
+
+<script>
+
+    //Exercídio 1
+
+    //seleciona elemento button
+    var btnElement = document.querySelector('button#addDiv');
+    //seleciona elemento com id divMaster
+    var divMaster = document.querySelector('div#divMaster');
+
+    btnElement.onclick = function () {
+
+        //cria nova DIV
+        var divElement = document.createElement('div');
+
+        //inseri nova DIV na divMaster
+        divMaster.appendChild(divElement);
+
+        
+        //contador de elementos DIV possuem no documento
+        var divNumElements = document.querySelectorAll('div.divInterna');
+
+        //atribui ID com o contador a nova DIV e Classe
+        divElement.setAttribute('class', 'divInterna');
+        divElement.setAttribute('id', divNumElements.length);
+
+        //atribui uma função para receber o evento do mouse - Exercício 2
+        divElement.addEventListener('mouseenter', mudarcor, false);
+
+        //atribui um estilo a div criada
+        divElement.style.width = 100;
+        divElement.style.height = 100;
+        divElement.style.backgroundColor = '#f00';
+    };
+
+
+    //Exercício 2
+
+    //função para gerar cores html
+    function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    //função para mudar a cor da div a partir de um evento disparado
+    function mudarcor (event) {
+        var newColor = getRandomColor();
+        event.target.style.backgroundColor = newColor;
+    };
+
+
+    //Exercídio 3
+ 
+    //cria array com strings
+    var nomes = ["Diego", "Gabriel", "Lucas"];
+    //cria novo elemento ul
+    var newUl = document.createElement('ul');
+    //requere a body
+    var bodyElements = document.querySelector('body');
+    //adiciona novo elemento ul a body
+    bodyElements.appendChild(newUl);
+    
+    function ulElemento (){
+        for (i=0; i < nomes.length; i++){
+            //cria novo elemento lista li
+            var newLi = document.createElement('li');
+            //adiciona novo elemento li a ul
+            var ul = bodyElements.querySelector('ul');
+            ul.appendChild(newLi);
+            //converte o texto em uma codificação Node e adiciona-o a ul criada
+            newLi.appendChild(document.createTextNode(nomes[i]));
+        }
+    }
+
+    //executar a função no carregamento da página
+    document.body.onload = ulElemento;
+
+
+    //Exercício 4
+    
+    var btnAddNome = document.querySelector('button#addNome');
+    var nome = document.querySelector('input[name=nome]');
+
+    btnAddNome.onclick = function (){
+        if (nome.value != ""){
+            var newLi = document.createElement('li');
+            var ul = bodyElements.querySelector('ul');
+            
+            ul.appendChild(newLi);
+            newLi.appendChild(document.createTextNode(nome.value));
+            nome.value = "";
+        }else{alert('Preencha o NOME!')}
+    }
+    
+</script>
+
+</html>
