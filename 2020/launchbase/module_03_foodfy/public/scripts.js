@@ -1,4 +1,4 @@
-const modalOverlay = document.querySelector('.modal_overlay');
+//const modalOverlay = document.querySelector('.modal_overlay');
 const cards = document.querySelectorAll('.card');
 
 
@@ -6,11 +6,11 @@ const cards = document.querySelectorAll('.card');
 for (let card of cards) {
     card.addEventListener("click", function(){
         //const recipes = data; // Array de receitas carregadas do data.js
-        const recipeIndex = req.params.index;
-
-        console.log(recipeIndex);
+        //const recipeIndex = req.params.index;
+        var pos = cards.index(card);
+        console.log(pos);
         //window.location.href = `/recipes/:index`;
-    })
+    },false)
 }
  /*
 for (let card of cards){

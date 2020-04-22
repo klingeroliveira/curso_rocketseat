@@ -77,35 +77,37 @@
     //adiciona novo elemento ul a body
     bodyElements.appendChild(newUl);
     
-    function ulElemento (){
-        for (i=0; i < nomes.length; i++){
+    function renderUlElemento (){
+        //limpa lista de nomes
+        newUl.innerHTML = "";
+        for (nome of nomes){
             //cria novo elemento lista li
             var newLi = document.createElement('li');
             //adiciona novo elemento li a ul
             var ul = bodyElements.querySelector('ul');
             ul.appendChild(newLi);
             //converte o texto em uma codificação Node e adiciona-o a ul criada
-            newLi.appendChild(document.createTextNode(nomes[i]));
+            newLi.appendChild(document.createTextNode(nome));
         }
     }
 
     //executar a função no carregamento da página
-    document.body.onload = ulElemento;
+    renderUlElemento();
 
 
     //Exercício 4
     
     var btnAddNome = document.querySelector('button#addNome');
-    var nome = document.querySelector('input[name=nome]');
+    var nomeText = document.querySelector('input[name=nome]');
 
-    btnAddNome.onclick = function (){
-        if (nome.value != ""){
-            var newLi = document.createElement('li');
-            var ul = bodyElements.querySelector('ul');
-            
-            ul.appendChild(newLi);
-            newLi.appendChild(document.createTextNode(nome.value));
-            nome.value = "";
+    btnAddNome.onclick = function (pos){
+        if (nomeText.value != ""){
+            //adiciona o nome digitado ao array de strings
+            nomes.push(nomeText.value)
+            //limpa o campo text
+            nomeText.value = "";
+            //executa a função para rendereziar a lista de nomes na página
+            renderUlElemento();
         }else{alert('Preencha o NOME!')}
     }
     
