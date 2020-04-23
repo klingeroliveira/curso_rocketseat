@@ -5,14 +5,13 @@ const cards = document.querySelectorAll('.card');
 
 for (let card of cards) {
     card.addEventListener("click", function(){
-        //const recipes = data; // Array de receitas carregadas do data.js
+        const idCard = card.getAttribute("id");
         //const recipeIndex = req.params.index;
-        //var pos = cards.indexOf(card);
-        console.log(card);
-        //window.location.href = `/recipes/:index`;
+        console.log(idCard);
+        window.location.href = `/recipes/${idCard}`;
     })
 }
- /*
+/*
 for (let card of cards){
     card.addEventListener("click", function(){
         const modalImg = card.getAttribute("id");

@@ -226,3 +226,90 @@ header a{
     line-height: 62px; 
     text-align: center;
 }
+
+/*====Recipes Details====*/
+.recipe{
+    max-width: 940px;
+    margin: auto;
+}
+
+.recipe_img{
+    margin-top: 56px;
+}
+
+.recipe_img img{
+    border-radius: 15px;
+}
+
+.recipe_content{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 36px;
+    color: var(--collor-text-title);
+    text-align: center;
+    line-height: 42px;
+    margin-top: 50px;
+}
+
+.recipe_info{
+    font-family: 'Roboto-Regular';
+    font-size: 20px;
+    color: var(--collor-text-info);
+    text-align: center;
+    margin-top: 4px;
+    line-height: 24px;
+}
+
+.recipe_ingredients{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--collor-text-title);
+    line-height: 28px;
+    margin-top: 50px;
+}
+
+.recipe_info_ingredients{
+    font-family: 'Roboto';
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--collor-text-body-sobre);
+    margin-top: 20px;
+}
+
+.recipe_info_ingredients li{
+    list-style-position: inside;
+}
+
+.recipe_preparation{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--collor-text-title);
+    line-height: 28px;
+    margin-top: 39px;
+}
+
+.recipe_info_preparation{
+    font-family: 'Roboto';
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--collor-text-body-sobre);
+    margin-top: 20px;
+}
+
+.recipe_information{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--collor-text-title);
+    margin-top: 39px;
+}
+
+.recipe_info_information{
+    font-family: 'Roboto';
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--collor-text-body-sobre);
+    margin-top: 20px;
+}

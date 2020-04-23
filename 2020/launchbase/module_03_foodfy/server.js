@@ -26,10 +26,17 @@ server.get("/recipes", function(req, res){
 })
 
 server.get("/recipes/:index", function (req, res) {
-  const recipes = data; // Array de receitas carregadas do data.js
   const recipeIndex = req.params.index;
+  const recipe = data[recipeIndex];
 
-  console.log(recipes[recipeIndex]);
+  if (!recipe){
+    return res.render("not-found");
+  }else{
+    return res.render("recipe-details", {item: recipe} );}
+})
+
+server.use(function(req,res){
+    res.status(404).render("not-found")
 })
 
 server.listen(5002, function(){
