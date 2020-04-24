@@ -317,4 +317,9 @@ header a{
 .expandDetails{
     text-decoration: none;
     cursor: pointer;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--collor-text-footer);
 }

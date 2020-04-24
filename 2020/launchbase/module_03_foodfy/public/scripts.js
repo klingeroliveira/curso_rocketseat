@@ -1,5 +1,5 @@
 const cards = document.querySelectorAll('.card');
-const expandDetails = document.querySelectorAll('a.expandDetails');
+const detailsRecipe = document.querySelectorAll('a.expandDetails');
 
 
 for (let card of cards) {
@@ -9,22 +9,28 @@ for (let card of cards) {
     })
 }
 
-for (let expand of expandDetails) {
-    expand.addEventListener("click", function () {
-        if (expand.getAttribute('name').toString = "preparation") {
-            const preparation = document.querySelector('.recipe_info_preparation');
-            console.log(expand.textContent);
-            hidden(expand,preparation);
+for (let detailRecipe of detailsRecipe) {
+    detailRecipe.addEventListener("click", function () {
+
+        if (detailRecipe.getAttribute('name') == "top_ingredients") {
+            const ingredients = document.querySelector('div[name=ingredients]');
+            hidden(detailRecipe,ingredients);
+        } else if (detailRecipe.getAttribute('name') == "top_preparation") {
+            const preparation = document.querySelector('div[name=preparation]');
+            hidden(detailRecipe,preparation);
+        } else if (detailRecipe.getAttribute('name') == "top_information") {
+            const information = document.querySelector('div[name=information]');
+            hidden(detailRecipe,information);
         }
     })
 }
 
-function hidden(expand, preparation){
-    if (expand.textContent = "ESCONDER"){
-        preparation.setAttribute('hidden', true);
-        expand.textContent = "MOSTRAR";
-     }else {
-         preparation.removeAttribute('hidden');
-         expand.textContent = "ESCONDER";
-     }
+function hidden(name,content){
+    if (name.textContent == "MOSTRAR"){
+        content.removeAttribute('hidden');
+        name.textContent = "ESCONDER";
+    } else {
+        content.setAttribute('hidden',true);
+        name.textContent = "MOSTRAR";
+    }
 }
