@@ -313,3 +313,8 @@ header a{
     color: var(--collor-text-body-sobre);
     margin-top: 20px;
 }
+
+.expandDetails{
+    text-decoration: none;
+    cursor: pointer;
+}

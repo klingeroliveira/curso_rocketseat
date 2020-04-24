@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="recipe_preparation">
-            <p class="p_recipe_preparation">Modo de Preparo</p>
+            <p class="p_recipe_preparation">Modo de Preparo <a name="preparation"  class="expandDetails">ESCONDER</a></p>
         </div>
         <div class="recipe_info_preparation">
             {% for preparation in item.preparation %}
@@ -31,11 +31,12 @@
             {% endfor %}
         </div>
         <div class="recipe_information">
-            <p class="p_recipe_information">Informações Adicionais</p>
+            <p class="p_recipe_information">Informações Adicionais <a name="information" class="expandDetails">ESCONDER</a></p>
         </div>
         <div class="recipe_info_information">
             <p class="p_recipe_information">{{item.information}}</p>
         </div>
     </div>
 
+<script src="/scripts.js"></script>
 {% endblock %}
