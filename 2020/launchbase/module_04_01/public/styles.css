@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* 
+#c0b283  dourado
+#dcd0c0  bege
+
+#373737  escuro
+#f4f4f4  papel
+*/
+
+* { 
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+header {
+    background-color: #c0b283 ;
+    margin-top: 20px;
+    padding: 15px 15px 5px 15px;
+    text-align: center;
+    
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    font-size: 18px;
+}
+
+.links a {
+    color: #373737;
+    text-decoration: none;
+    position: relative;
+}
+
+.links a + a {
+    margin-left: 20px;
+}
+
+.links a.active {
+    font-weight: bold;
+}
+
+.links a::after {
+    content: "";
+    width: 110%;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: -5px;
+    
+    border-radius: 5px;
+}
+
+.links a:hover::after {
+    height: 200%;
+    transition: 0.5s ease-in-out;
+}
