@@ -10,7 +10,7 @@ routes.get("/teachers", function(req, res){
 })
 
 routes.get("/students", function(req, res){
-    return res.send("students")
+    return res.render("students/index")
 })
 
 module.exports = routes
