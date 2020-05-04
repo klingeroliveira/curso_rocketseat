@@ -75,7 +75,7 @@ header {
     margin: 50px auto;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 40% 60%;
 
     box-shadow: 0 2px 6px -1px var(--color-header-background);
 
@@ -97,25 +97,35 @@ header {
     padding: 38px;
 }
 
-.dados .item {
-    padding: 16px 0;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+h3 {
+    text-align: center;
+    background-color: var(--color-header-background);
+    line-height: 24px;
+    display: flexbox;
 }
 
-.dados .item:last-child {
+.dados .item {
+    padding: 16px 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.dados .item:nth-child(2) {
     border: none;
 }
 
 .dados .item div:first-child {
-    color: #555555;
+    color: var(--color-header-background);
     font-size: 16px;
     line-height: 24px;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
+
 }
 
-.dados .item div:nth-last-child(1) {
-    font-weight: bold;
+.dados .item div:nth-child(2) {
     font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    
 }
 
 .dados .item span {
@@ -123,5 +133,14 @@ header {
     border-radius: 20px;
     padding: 8px;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-style: oblique;
+}
+
+.dados .item:nth-child(7) div:first-child,
+.dados .item:nth-child(7) div:nth-child(2) {
+    font-weight: bold;
+}
+
 }
