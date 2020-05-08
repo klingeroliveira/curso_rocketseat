@@ -128,11 +128,7 @@ header{
     font-weight: 18px;
 }
 
-.details h3 {
-    text-transform: uppercase;
-    font-weight: bold;
-    color: var(--cor-principal);
-}
+
 
 .details .item span {
     padding: 8px 16px;
