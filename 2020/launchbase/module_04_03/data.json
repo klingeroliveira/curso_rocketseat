@@ -1,0 +1,44 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "avatar_url": "http://teste.com",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "Ensino Superior Completo",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2, matéria3",
+      "data_cadastro": 1589203935801
+    },
+    {
+      "id": 2,
+      "avatar_url": "http://teste.com",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "Ensino Superior Completo",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2, matéria3",
+      "data_cadastro": 1589203938153
+    },
+    {
+      "id": 3,
+      "avatar_url": "http://teste.com",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "Ensino Superior Completo",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2, matéria3",
+      "data_cadastro": 1589203940081
+    },
+    {
+      "id": 4,
+      "avatar_url": "http://teste.com",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "Ensino Superior Completo",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2, matéria3",
+      "data_cadastro": 1589203943019
+    }
+  ]
+}

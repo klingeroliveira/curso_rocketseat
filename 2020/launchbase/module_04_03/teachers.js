@@ -1,4 +1,5 @@
-
+const fs = require('fs')
+const data = require('./data.json')
 
 //POST create
 exports.post =  function (req, res){
@@ -11,6 +12,19 @@ exports.post =  function (req, res){
         }
     }
 
+    let { avatar_url, nome, data_nascimento, grau_escolaridade, tipo_aula, area_atuacao } = req.body
+
+    const id = Number(data.teachers.length + 1)
+    const data_cadastro = Date.now()
+
+    data_nascimento = Date.parse(data_nascimento)
     
-    return res.render("teachers/create")
+    data.teachers.push({id, avatar_url, nome, data_nascimento, grau_escolaridade, tipo_aula, area_atuacao, data_cadastro})
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2 ), function(err){
+        if (err) return res.send("Erro ao gravar dados!")
+
+        return res.redirect("/teachers")
+    })
+
 }
