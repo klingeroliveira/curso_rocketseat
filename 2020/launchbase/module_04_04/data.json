@@ -1,0 +1,64 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "avatar_url": "https://i.pinimg.com/736x/b4/0d/c8/b40dc8737a96ee706e5edbb559708281.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "medio",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2",
+      "data_cadastro": 1589203935801
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "doutorado",
+      "tipo_aula": "P",
+      "area_atuacao": "matéria1, matéria2, matéria3",
+      "data_cadastro": 1589203938153
+    },
+    {
+      "id": 3,
+      "avatar_url": "https://i.pinimg.com/736x/b4/0d/c8/b40dc8737a96ee706e5edbb559708281.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "mestrado",
+      "tipo_aula": "D",
+      "area_atuacao": "matéria1, matéria2, matéria3, matéria4",
+      "data_cadastro": 1589203940081
+    },
+    {
+      "id": 4,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "superior",
+      "tipo_aula": "P",
+      "area_atuacao": "matéria1",
+      "data_cadastro": 1589203943019
+    },
+    {
+      "id": 5,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Bárbara",
+      "data_nascimento": 1034208000000,
+      "grau_escolaridade": "medio",
+      "tipo_aula": "D",
+      "area_atuacao": "história, português, inglês",
+      "data_cadastro": 1589474441777
+    },
+    {
+      "id": 6,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Bárbara",
+      "data_nascimento": 1034294400000,
+      "grau_escolaridade": "medio",
+      "tipo_aula": "P",
+      "area_atuacao": "história, português, inglês",
+      "data_cadastro": 1589484077306
+    }
+  ]
+}
