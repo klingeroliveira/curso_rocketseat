@@ -10,49 +10,13 @@
       "created_at": 1589227087877
     },
     {
-      "id": 2,
-      "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTZxrQ1WYa2bUNqSiCiYYjOkoJh0aT9fLCJvAn7029weCqzHF5x&usqp=CAU",
-      "name": "jkghjkh",
-      "birth": 880934400000,
-      "gender": "F",
-      "services": "as , asdfa, asdf.uyui",
-      "created_at": 1589227321948
-    },
-    {
       "id": 3,
       "avatar_url": "https://cdn1.vectorstock.com/i/thumb-large/59/65/nerd-guy-avatar-icon-vector-21065965.jpg",
-      "name": "jkghjkh",
-      "birth": 958003200000,
+      "name": "jk",
+      "birth": 950227200000,
       "gender": "M",
       "services": "as , asdfa. asdfa, asdf",
       "created_at": 1589289706187
-    },
-    {
-      "id": 4,
-      "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTZxrQ1WYa2bUNqSiCiYYjOkoJh0aT9fLCJvAn7029weCqzHF5x&usqp=CAU",
-      "name": "asssssae",
-      "birth": 958089600000,
-      "gender": "M",
-      "services": "as , asdfa, asdf.uyui",
-      "created_at": 1589289758507
-    },
-    {
-      "id": 5,
-      "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTZxrQ1WYa2bUNqSiCiYYjOkoJh0aT9fLCJvAn7029weCqzHF5x&usqp=CAU",
-      "name": "asssssae",
-      "birth": 958176000000,
-      "gender": "F",
-      "services": "as , asdfa, asdf.uyui",
-      "created_at": 1589289777866
-    },
-    {
-      "id": 6,
-      "avatar_url": "https://cdn1.vectorstock.com/i/thumb-large/59/65/nerd-guy-avatar-icon-vector-21065965.jpg",
-      "name": "jkghjkh",
-      "birth": 958003200000,
-      "gender": "M",
-      "services": "as , asdfa. asdfa, asdf",
-      "created_at": 1589291552026
     }
   ]
 }

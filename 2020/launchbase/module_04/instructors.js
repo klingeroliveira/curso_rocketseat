@@ -4,6 +4,11 @@ const data = require('./data.json')
 const { age, date } = require('./utils')
 const Intl = require('intl')
 
+//index
+exports.index = function(req,res){
+    return res.render("instructors/index", {instructors: data.instructors})
+}
+
 //show
 exports.show = function(req,res){
 
@@ -47,7 +52,7 @@ exports.post = function(req,res){
     fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
         if (err) return res.send("Falha ao gravar o arquivo!")
 
-        return res.redirect('/instructors')
+        return res.redirect(`/instructors/${id}`)
     })
 
    // return res.send(req.body)
@@ -70,4 +75,52 @@ exports.edit = function(req,res){
     }
 
     return res.render("instructors/edit", { instructor })
+}
+
+//put
+exports.put = function(req,res){
+    const { id } = req.body
+    let index = 0
+
+    const foundInstructor = data.instructors.find(function(instructor, foundIndex){
+        if (instructor.id == id){
+            index = foundIndex
+            return true
+        }
+    })
+
+    if (!foundInstructor) return res.send("Instructor not found!")
+
+    const instructor = {
+        ...foundInstructor,
+        ...req.body,
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id)
+    }
+
+    data.instructors[index] = instructor
+
+    fs.writeFile("data.json", JSON.stringify(data,null,2), function(err){
+        if (err) return res.send("Falha ao gravar arquivo!")
+
+        return res.redirect(`/instructors/${id}`)
+    })
+
+}
+
+//delete
+exports.delete = function(req,res){
+    const { id } = req.body
+
+    const foundInstructor = data.instructors.filter(function(instructor){
+        return instructor.id != id
+    })
+
+    data.instructors = foundInstructor
+
+    fs.writeFile("data.json", JSON.stringify(data,null,2), function(err){
+        if (err) return res.send("Falha ao gravar o arquivo!")
+
+        return res.redirect("/instructors")
+    })
 }

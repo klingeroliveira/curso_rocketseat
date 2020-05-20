@@ -1,0 +1,24 @@
+{
+  "teachers": [
+    {
+      "id": 2,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": -23890291200000,
+      "grau_escolaridade": "doutorado",
+      "tipo_aula": "D",
+      "areas_atuacao": "java script, css, html",
+      "data_cadastro": 1589203938153
+    },
+    {
+      "id": 5,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Bárbara",
+      "data_nascimento": 1034208000000,
+      "grau_escolaridade": "medio",
+      "tipo_aula": "D",
+      "areas_atuacao": "história, português, inglês",
+      "data_cadastro": 1589474441777
+    }
+  ]
+}
