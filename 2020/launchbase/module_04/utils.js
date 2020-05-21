@@ -15,13 +15,46 @@ module.exports = {
 
     },
 
-    date: function date(timestamp){
+    date: function date(timestamp) {
         const date = new Date(timestamp)
 
         const year = date.getUTCFullYear()
-        const month = `0${date.getUTCMonth()}`.slice(-2)
+        const month = `0${date.getUTCMonth() + 1}`.slice(-2)
         const day = `0${date.getUTCDate()}`.slice(-2)
 
-        return (`${year}-${month}-${day}`)
+        return {
+            iso: `${year}-${month}-${day}`,
+            birthDay: `${day}/${month}`,
+            day,
+            month,
+            year
+        }
+    },
+
+    blood: function blood(text) {
+
+        let blood = ""
+
+        switch (text) {
+            case "A0": blood = "A+"
+                break;
+            case "A1": blood = "A-"
+                break;
+            case "B0": blood = "B+"
+                break;
+            case "B1": blood = "B-"
+                break;
+            case "AB0": blood = "AB+"
+                break;
+            case "AB1": blood = "AB-"
+                break;
+            case "O0": blood = "O+"
+                break;
+            case "O1": blood = "O-"
+                break;
+            default: ""
+                break;
+        }
+        return blood
     }
 }

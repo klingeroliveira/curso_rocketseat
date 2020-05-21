@@ -20,6 +20,7 @@ exports.index = function(req, res){
     return res.render("teachers/index", {teachers: listTeachers})
 }
 
+
 //POST create
 exports.post =  function (req, res){
 
@@ -31,14 +32,19 @@ exports.post =  function (req, res){
         }
     }
 
-    let { avatar_url, nome, data_nascimento, grau_escolaridade, tipo_aula, areas_atuacao } = req.body
+    let id = 1
+    const lastTeacher = data.teachers[ data.teachers.length -1 ]
 
-    const id = Number(data.teachers.length + 1)
+    if (lastTeacher) { id = lastTeacher.id + 1 }
+
     const data_cadastro = Date.now()
-
     data_nascimento = Date.parse(data_nascimento)
     
-    data.teachers.push({id, avatar_url, nome, data_nascimento, grau_escolaridade, tipo_aula, areas_atuacao, data_cadastro})
+    data.teachers.push({
+        ...req.body,
+        id, 
+        data_nascimento, 
+        data_cadastro})
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2 ), function(err){
         if (err) return res.send("Erro ao gravar dados!")
@@ -47,7 +53,6 @@ exports.post =  function (req, res){
     })
 
 }
-
 
 
 //GET show
@@ -75,7 +80,6 @@ exports.show = function(req,res){
 }
 
 
-
 //GET edit
 exports.edit = function(req,res){
 
@@ -87,16 +91,17 @@ exports.edit = function(req,res){
 
     if (!foundTeacher) return res.send("Professor não encontrado!")
 
+    
     const teacher = {
         ...foundTeacher,
         data_nascimento: date(foundTeacher.data_nascimento)
     }
 
+
     return res.render("teachers/edit", { teacher })
 
 
 }
-
 
 
 //POST update (PUT) 
@@ -128,7 +133,6 @@ exports.update = function(req,res){
         return res.redirect(`/teachers/${id}`)
     })
 }
-
 
 
 //POST delete

@@ -17,12 +17,14 @@
             
             </form>
 
-            <form method="post" action="/instructors?_method=DELETE">
+            <form id="form-delete" method="post" action="/instructors?_method=DELETE">
 
                 <input type="hidden" name="id" value="{{ instructor.id }}">
                 <button id="button_delete" type="submit">Delete</button>
             
             </form>
+
+            {% include "../confirmDelete.njk" %}
         </section>
     </div>
 {% endblock content %}

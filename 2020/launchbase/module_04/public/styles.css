@@ -216,7 +216,8 @@ tbody tr:last-child td {
     border-bottom: none;
 }
 
-tbody a {
+tbody tr td:last-child a,
+.table-container > a {
     background-color: var(--cor-principal);
     padding: 8px 16px;
     color: white;
@@ -226,6 +227,10 @@ tbody a {
     border-radius: 4px;
 }
 
+.table-container > a {
+    margin-bottom: 16px;
+    display: inline-block;
+}
 
 tbody tr td:first-child {
     display: grid;
@@ -247,4 +252,10 @@ tbody tr td:first-child span {
 td:last-child,
 th:last-child {
     text-align: center;
+}
+
+/*===MEMBER===*/
+
+select {
+    cursor: pointer;
 }
