@@ -1,0 +1,54 @@
+{
+  "teachers": [
+    {
+      "id": 2,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Klinger Oliveira",
+      "data_nascimento": 432172800000,
+      "grau_escolaridade": "mestrado",
+      "tipo_aula": "D",
+      "areas_atuacao": "java script, css, html",
+      "data_cadastro": 1589203938153
+    },
+    {
+      "id": 5,
+      "avatar_url": "https://cdn4.vectorstock.com/i/1000x1000/95/28/cartoon-male-teacher-vector-16659528.jpg",
+      "nome": "Bárbara",
+      "data_nascimento": 1034208000000,
+      "grau_escolaridade": "medio",
+      "tipo_aula": "D",
+      "areas_atuacao": "história, português, inglês",
+      "data_cadastro": 1589474441777
+    },
+    {
+      "avatar_url": "https://static8.depositphotos.com/1052036/1058/v/450/depositphotos_10583067-stock-illustration-3d-business-man-in-vector.jpg",
+      "nome": "Klinger S Oliveira",
+      "data_nascimento": 960768000000,
+      "grau_escolaridade": "doutorado",
+      "tipo_aula": "P",
+      "areas_atuacao": "java script, css, html",
+      "id": 6,
+      "data_cadastro": 1590158198248
+    }
+  ],
+  "students": [
+    {
+      "avatar_url": "https://img.freepik.com/vetores-gratis/menina-asiatica-com-bolsa_1308-17964.jpg?size=338&ext=jpg",
+      "nome": "Bárbara Sabatini Teodoro Barbosa",
+      "email": "sarasabatini@hotmail.com",
+      "data_nascimento": 1031616000000,
+      "ano_escolar": "3em",
+      "carga_horaria": "44",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://static8.depositphotos.com/1052036/1058/v/450/depositphotos_10583067-stock-illustration-3d-business-man-in-vector.jpg",
+      "nome": "Klinger S Oliveira",
+      "email": "sarasabatini@hotmail.com",
+      "data_nascimento": 424224000000,
+      "ano_escolar": "1em",
+      "carga_horaria": "44"
+    }
+  ]
+}
