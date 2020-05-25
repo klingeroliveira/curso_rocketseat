@@ -1,0 +1,32 @@
+<script>
+
+function addIngrediente() {
+    const ingredientes = document.querySelector("#ingredientes");
+    const inputsIngredientes = document.querySelectorAll(".ingrediente");
+
+    console.log("entrou");
+
+    const novoInput = inputsIngredientes[inputsIngredientes.length - 1].cloneNode(true);
+
+    if (novoInput.children[0].value == "") return false;
+
+    novoInput.children[0].value = ""
+    ingredientes.appendChild(novoInput);
+}
+
+function addPasso() {
+    const passos = document.querySelector("#passos");
+    const inputsPassos = document.querySelectorAll(".passo")
+
+    const novoInput = inputsPassos[inputsPassos.length - 1].cloneNode(true);
+
+    if (novoInput.children[0].value == "") return false;
+
+    novoInput.children[0].value = ""
+    passos.appendChild(novoInput);
+}
+
+
+document.querySelector(".add_ingredientes").addEventListener("click", addIngrediente);
+document.querySelector(".add_passos").addEventListener("click", addPasso);
+</script>
