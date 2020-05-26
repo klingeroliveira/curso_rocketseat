@@ -280,6 +280,7 @@ header a{
 
 .recipe_info_ingredients li{
     list-style-position: inside;
+    list-style-type: none;
 }
 
 .recipe_preparation{
@@ -339,13 +340,16 @@ h3 {
     font-size: 24px;
 }
 
-.form_admin .cabecalho {
+.cabecalho {
+    max-width: 940px;
     display: grid;
     grid-template-columns: 1fr 140px;
-    align-items: baseline;
+    align-items: center;
+    margin: 55px auto 24px auto;
 }
 
-.form_admin .cabecalho button{
+.cabecalho button,
+.cabecalho .button {
     background-color: var(--collor-background-button);
     width: 139px;
     height: 37px;
@@ -355,6 +359,9 @@ h3 {
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    line-height: 37px;
 }
 
 .item {

@@ -10,7 +10,7 @@
             <p class="p_recipe_content">{{item.title}}</p>
         </div>
         <div class="recipe_info">
-            <p class="p_recipe_info">{{item.author}}</p>
+            <p class="p_recipe_info">por {{item.author}}</p>
         </div>
         <div class="recipe_ingredients">
             <p class="p_recipe_ingredients">Ingredientes <a name="top_ingredients"  class="expandDetails">ESCONDER</a></p>
@@ -18,7 +18,7 @@
         <div name="ingredients" class="recipe_info_ingredients">
             <ul>
                 {% for ingrendient in item.ingredients %}
-                    <li>{{ingrendient}}</li>
+                    <li>- {{ingrendient}}</li>
                 {% endfor %}
             </ul>
         </div>
@@ -27,7 +27,7 @@
         </div>
         <div name="preparation" class="recipe_info_preparation">
             {% for preparation in item.preparation %}
-                <p class="p_recipe_preparation">{{preparation}}</p>
+                <p class="p_recipe_preparation">- {{preparation}}</p>
             {% endfor %}
         </div>
         <div class="recipe_information">

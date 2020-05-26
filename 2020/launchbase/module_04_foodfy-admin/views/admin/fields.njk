@@ -1,12 +1,26 @@
 <div class="item">
     <div>Imagem da receita</div>
-    <div><input type="text" name="imagem_receita"></div>
+    <div><input type="text" name="image"></div>
+</div>
+
+<div class="item">
+    <div>Título da Receita</div>
+    <div> 
+        <input type="text" name="title"> 
+    </div>
+</div>
+
+<div class="item">
+    <div>Autor da Receita</div>
+    <div> 
+        <input type="text" name="author"> 
+    </div>
 </div>
 
 <div class="item" id="ingredientes">
     <div>Ingredientes</div>
     <div class="ingrediente" >
-        <input type="text" name="ingrediente[]" >
+        <input type="text" name="ingredients[]" >
     </div>
 </div>
 
@@ -15,7 +29,7 @@
 <div class="item" id="passos">
     <div>Modo de preparo</div>
     <div class="passo">
-        <input type="text" name="modo_preparo[]">
+        <input type="text" name="preparation[]">
     </div>
 </div>
 
@@ -23,6 +37,6 @@
 
 <div class="item">
     <div>Informações adicionais</div>
-    <div><textarea name="nf_adicionais" class="inf_adicionais"></textarea></div>
+    <div><textarea name="information" class="inf_adicionais"></textarea></div>
     
 </div>

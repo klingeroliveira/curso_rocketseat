@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="/admin/receitas" class="form_admin" method="Post">
+<form action="/admin/receitas?_method=PUT" class="form_admin" method="Post">
     <section class="cabecalho">
         <h3>Crianco receita</h3>
         <button type="submit">Salvar receita</button>
@@ -11,9 +11,8 @@
     <section class="dados">
     
         {% include "admin/fields.njk" %}
-
     </section>
-
+    <input type="hidden" name="id" value="{{ item.id }}">
 </form>
 {% include "admin/scripts.njk" %}
 

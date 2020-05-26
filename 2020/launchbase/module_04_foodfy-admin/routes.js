@@ -2,7 +2,7 @@ const express = require("express")
 const data = require('./data')
 const routes = express.Router()
 
-const recipes = require("./controllers/recipes")
+const receitas = require("./controllers/receitas")
 
 routes.get("/", function(req, res){
     return res.render("home", { items: data })
@@ -27,8 +27,12 @@ routes.get("/recipes/:index", function (req, res) {
 })
 
 
-routes.get("/admin/recipes", recipes.index)
-routes.get("/admin/recipes/create", recipes.create)
+routes.get("/admin/receitas", receitas.index)
+routes.get("/admin/receitas/create", receitas.create)
+routes.get("/admin/receitas/:id", receitas.show)
+routes.get("/admin/:id/edit", receitas.edit)
+
+routes.post("/admin/receitas", receitas.post)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")
