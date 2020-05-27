@@ -33,6 +33,7 @@ routes.get("/admin/receitas/:id", receitas.show)
 routes.get("/admin/:id/edit", receitas.edit)
 
 routes.post("/admin/receitas", receitas.post)
+routes.put("/admin/receitas", receitas.update)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")

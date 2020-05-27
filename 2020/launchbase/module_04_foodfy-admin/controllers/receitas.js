@@ -54,3 +54,31 @@ exports.edit = function (req, res) {
 
     return res.render("admin/edit", {item: localizarReceita} )
 }
+
+exports.update = function (req,res) {
+    const {id} = req.body
+    let index = 0
+
+    const localizarReceita = data.receitas.find( function(receita, localizarIndex) {
+        if ( receita.id == id) {
+            index = localizarIndex
+            return true
+        }
+    })
+
+    if (!localizarReceita) return ("Receita não encontrada!")
+
+    const receita = {
+        ...localizarReceita,
+        ...req.body,
+        id: Number(req.body.id)
+    }
+
+    data.receitas[index] = receita
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+        if (err) return res.send("Erro ao gravar dados!")
+
+        return res.redirect(`/admin/receitas/${id}`)
+    })
+}
