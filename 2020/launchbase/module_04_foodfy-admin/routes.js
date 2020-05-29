@@ -30,10 +30,11 @@ routes.get("/recipes/:index", function (req, res) {
 routes.get("/admin/receitas", receitas.index)
 routes.get("/admin/receitas/create", receitas.create)
 routes.get("/admin/receitas/:id", receitas.show)
-routes.get("/admin/:id/edit", receitas.edit)
+routes.get("/admin/receitas/:id/edit", receitas.edit)
 
 routes.post("/admin/receitas", receitas.post)
 routes.put("/admin/receitas", receitas.update)
+routes.delete("/admin/receitas", receitas.delete)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")

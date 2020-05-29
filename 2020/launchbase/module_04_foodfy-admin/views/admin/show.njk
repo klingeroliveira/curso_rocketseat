@@ -3,8 +3,10 @@
 
 {% block topButton %}
 
-<section class="cabecalho">
-        <h3>Receita: {{ item.title }}</h3>
-        <a href="/admin/{{ item.id }}/edit" class="button">Editar receita</a>
-</section>
+        <section class="cabecalho">
+                <h3>Receita: {{ item.title }}</h3>
+                <div></div>
+                <a href="/admin/receitas/{{ item.id }}/edit" class="button">Editar receita</a>
+        </section>
+
 {% endblock topButton %}

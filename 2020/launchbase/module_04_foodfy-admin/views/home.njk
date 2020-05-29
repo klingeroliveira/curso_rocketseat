@@ -10,13 +10,14 @@
             <img src="/images/chef.png" alt="Chef">
         </div>
     </div>
+{% endblock %}
+
+{% block content %}
 
     <div class="title">
         <h1>Mais acessadas</h1>
     </div>
-{% endblock %}
-
-{% block content %}
+    
     <section class="cards">
         
         {% for item in items %}
@@ -32,9 +33,7 @@
             </div>
         </div>
         {% endfor %}
-        </div>
 
     </section>
 
-    <script src="/scripts.js"></script>
 {% endblock %}

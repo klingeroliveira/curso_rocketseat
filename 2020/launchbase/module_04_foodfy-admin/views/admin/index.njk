@@ -1,1 +1,35 @@
 {% extends "layout.njk" %}
+
+{% block content %}
+
+    <section class="cabecalho">
+        <h3>Gerenciar Receitas</h3>      
+        <div></div>
+        <a href="/admin/receitas/create" class="button">Nova receita</a>
+    </section>
+
+    <section class="cards_admin">
+        {% for item in items %}
+        
+            <div class="card_admin" id={{item.id}}>
+                <section>
+                    <div class="card_admin_img">
+                        <img src="{{item.image}}" alt="">
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="card_admin_content">
+                        <p class="p_card_content">{{item.title}}</p>
+                    </div>
+                    <div class="card_admin_info">
+                        <p class="p_card_info">{{item.author}}</p>
+                    </div>
+                    <a href="receitas/{{item.id}}" class="button">Visualizar</a>
+                </section>
+            </div>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 const cards = document.querySelectorAll('.card');
 const detailsRecipe = document.querySelectorAll('a.expandDetails');
-
+const formEditRecipe = document.querySelector('#formEditRecipe');
 
 for (let card of cards) {
     card.addEventListener("click", function () {
@@ -9,6 +9,8 @@ for (let card of cards) {
     })
 }
 
+
+// função ocultar/mostrar dados
 for (let detailRecipe of detailsRecipe) {
     detailRecipe.addEventListener("click", function () {
 
@@ -34,3 +36,45 @@ function hidden(name,content){
         name.textContent = "MOSTRAR";
     }
 }
+//
+
+
+
+// função adicionar campos
+function addIngrediente() {
+    const ingredientes = document.querySelector("#ingredientes");
+    const inputsIngredientes = document.querySelectorAll(".ingrediente");
+
+    const novoInput = inputsIngredientes[inputsIngredientes.length - 1].cloneNode(true);
+
+    if (novoInput.children[0].value == "") return false;
+
+    novoInput.children[0].value = "";
+    ingredientes.appendChild(novoInput);
+}
+
+function addPasso() {
+    const passos = document.querySelector("#passos");
+    const inputsPassos = document.querySelectorAll(".passo");
+
+    const novoInput = inputsPassos[inputsPassos.length - 1].cloneNode(true);
+
+    if (novoInput.children[0].value == "") return false;
+
+    novoInput.children[0].value = "";
+    passos.appendChild(novoInput);
+}
+
+document.querySelector(".add_ingredientes").addEventListener("click", addIngrediente);
+document.querySelector(".add_passos").addEventListener("click", addPasso);
+//
+
+//inclusão metodo para form edit
+document.querySelector("button[name=button_salvar_edit]").addEventListener("click", function(){
+    formEditRecipe.setAttribute("action", "/admin/receitas?_method=PUT")
+})
+
+document.querySelector("button[name=button_delete_edit]").addEventListener("click", function(){
+    formEditRecipe.setAttribute("action", "/admin/receitas?_method=DELETE")
+})
+//
