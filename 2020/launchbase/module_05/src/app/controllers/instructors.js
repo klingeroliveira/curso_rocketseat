@@ -1,16 +1,16 @@
 
 const { age, date } = require('../../lib/utils')
 const db = require('../../config/db')
+const Instructors = require('../models/instructors')
 
 module.exports = {
 
     index(req,res){
 
-        db.query(`SELECT * FROM instructors`, function(err, results){
-            if (err) return res.send("Erro ao buscar dados!")
+        Instructors.all(function(instructors) {
+            return res.render("instructors/index", { instructors })
+        })        
 
-            return res.render("instructors/index", {instructors: results.rows})
-        })
     },
 
     create(req,res){
@@ -26,45 +26,35 @@ module.exports = {
                 return res.send("Preencha todos os campos.")
         }
 
-        const query = `
-            INSERT INTO instructors(
-                avatar_url,
-                name,
-                birth,
-                gender,
-                services,
-                created_at)
-            VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING id
-        `
-
-        const values = [
-            req.body.avatar_url,
-            req.body.name,
-            date(req.body.birth).iso,
-            req.body.gender,
-            req.body.services,
-            date(Date.now()).iso,
-        ]
-
-        db.query(query, values, function(err, results){
-            if (err) return res.send("Erro ao gravar dados!")
-            
-            return res.redirect(`/instructors/${results.rows[0].id}`)
+        Instructors.create(req.body, function(instructor){
+            return res.redirect(`instructors/${instructor.id}`)
         })
 
     },
 
     show(req,res){
 
+        Instructors.find(req.params.id, function(instructor){
+            if (!instructor) return res.send("Instrutor não encontrado!")
 
+            instructor.age = age(instructor.birth)
+            instructor.services = instructor.services.split(",")
+            instructor.created_at = date(instructor.created_at).format
+            
+            return res.render("instructors/show", { instructor })
+        })
 
-        return
     },
 
     edit(req,res){
 
-        return
+        Instructors.find(req.params.id, function(instructor){
+            if (!instructor) return res.send("Instrutor não encontrado!")
+
+            instructor.birth = date(instructor.birth).iso
+
+            return res.render("instructors/edit", { instructor })
+        })
     },
 
     put(req,res){
@@ -76,11 +66,17 @@ module.exports = {
                 return res.send("Preencha todos os campos.")
         }
 
-        return
+        Instructors.update(req.body, function(){
+            
+            return res.redirect(`instructors/${req.body.id}`)
+        })
     },
 
     delete(req,res){
 
-        return
+        Instructors.delete(req.body.id, function(){
+
+            return res.redirect("./instructors")
+        })
     }
 }
