@@ -1,6 +1,5 @@
 
 const { age, date } = require('../../lib/utils')
-const db = require('../../config/db')
 const Instructors = require('../models/instructors')
 
 module.exports = {
