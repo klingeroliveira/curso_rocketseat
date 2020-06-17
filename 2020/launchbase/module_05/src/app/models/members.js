@@ -59,22 +59,28 @@ module.exports = {
 
     update(body, callback){
         const query = ` 
-            UPDATE instructors SET
-                avatar_url = ($1),
-                name = ($2),
-                birth = ($3),
-                gender = ($4),
-                services = ($5)
-            WHERE id = ($6)
+            UPDATE members SET
+            avatar_url = ($1),
+            name = ($2),
+            email = ($3),
+            birth = ($4),
+            gender = ($5),
+            blood = ($6),
+            weight = ($7),
+            height = ($8)
+            WHERE id = ($9)
         `
 
         const values = [
             body.avatar_url,
             body.name,
+            body.email,
             date(body.birth).iso,
             body.gender,
-            body.services,
-            body.id
+            body.blood,
+            body.weight,
+            body.height,
+            body.id,
         ]
 
         db.query(query, values, function(err, results){
@@ -86,7 +92,7 @@ module.exports = {
 
     delete(id, callback){
 
-        db.query(`DELETE FROM instructors WHERE id = ($1)`, [id], function(err, results){
+        db.query(`DELETE FROM members WHERE id = ($1)`, [id], function(err, results){
             if (err) throw(`Erro ao apagar dados! ${err}`)
 
             callback()

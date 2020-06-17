@@ -9,10 +9,7 @@ module.exports = {
         if (month < 0 || (month == 0 && today.getDate() < birthDate.getDate())) {
             age = age - 1
         }
-        console.log(month)
-        console.log(today.getDate()) 
-        console.log(birthDate.getDate())
-        console.log(age)
+
         return age
 
     },

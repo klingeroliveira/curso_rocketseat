@@ -42,8 +42,13 @@ module.exports = {
     },
 
     edit(req,res){
+        Members.find(req.params.id, function(member){
+            if (!member) return res.send("Membro não encontrado!")
 
-        return
+            member.birth = date(member.birth).iso
+
+            return res.render("members/edit", { member })
+        })
     },
 
     put(req,res){
@@ -55,11 +60,15 @@ module.exports = {
                 return res.send("Preencha todos os campos.")
         }
 
-        return
+        Members.update(req.body,function(){
+            return res.redirect(`members/${req.body.id}`)
+        })
     },
 
     delete(req,res){
 
-        return
+        Members.delete(req.body.id, function(){
+            return res.redirect("/members")
+        })
     }
 }
