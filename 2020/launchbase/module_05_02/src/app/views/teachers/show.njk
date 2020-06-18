@@ -1,0 +1,76 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Teachers</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="card">
+
+        <section class="avatar" style="background: url({{ teacher.avatar_url }}) no-repeat center center / cover"></section>
+
+        <section class="dados">
+
+            <h3>Dados Professor</h3>
+
+            <div class="item">
+                <div>Nome</div>
+                <div>{{ teacher.nome }}</div>
+            </div>
+
+            <div class="item">
+                <div>Idade</div>
+                <div>
+                    {{ teacher.data_nascimento }}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Grau de escolaridade</div>
+                <div>
+                    {{ teacher.grau_escolaridade }}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Tipo de aula</div>
+                <div>
+                    {% if teacher.tipo_aula == "D" %}
+                        À distância
+                    {% else %}
+                        Presencial
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Acompanhamento</div>
+                <div>
+                    {% for area_atuacao in teacher.areas_atuacao %}
+                        <span>{{area_atuacao}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="item data_cadastro">
+                <div>Desde</div>
+                <div>{{ teacher.data_cadastro }}</div>
+            </div>
+
+            <div class="show_buttons">
+
+                <a href="/teachers/{{ teacher.id }}/edit" class="edit_button">EDITAR</a>
+
+                <form id="form-delete" method="POST" action="/teachers?_method=DELETE">
+                    <input type="hidden" name="id" value="{{ teacher.id }}">
+                    <button type="submit" id="delete_button">DELETE</button>
+                </form>
+            </div>
+
+            {% include "../confirm.njk"%}
+        </section>
+
+    </div>
+
+{% endblock content %}
