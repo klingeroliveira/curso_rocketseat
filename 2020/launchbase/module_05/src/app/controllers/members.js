@@ -11,7 +11,9 @@ module.exports = {
     },
 
     create(req,res){
-        return res.render("./members/create")
+        Members.instructorsSelectOption(function(instructors){
+            return res.render("./members/create", {instructors})          
+        })
     },
 
     post(req,res){
@@ -36,7 +38,6 @@ module.exports = {
             member.birth = date(member.birth).birthDay
             member.blood = blood(member.blood)
             
-
             return res.render("members/show", { member} )
         })
     },
@@ -47,7 +48,9 @@ module.exports = {
 
             member.birth = date(member.birth).iso
 
-            return res.render("members/edit", { member })
+            Members.instructorsSelectOption(function(instructors){
+                return res.render("members/edit", { member, instructors })
+            })
         })
     },
 
