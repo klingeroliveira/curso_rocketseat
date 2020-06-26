@@ -5,9 +5,18 @@ const Members = require('../models/members')
 module.exports = {
 
     index(req,res){
-        Members.all(function(members){
-            return res.render("members/index", { members })
-        })
+
+        const {filter} = req.query
+
+        if (filter){
+            Members.findBy(filter,function(members){
+                return res.render("members/index", { members, filter })
+            })
+        } else {
+            Members.all(function(members){
+                return res.render("members/index", { members })
+            })
+        }
     },
 
     create(req,res){

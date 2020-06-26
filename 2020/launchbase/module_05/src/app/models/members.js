@@ -39,7 +39,7 @@ module.exports = {
             body.blood,
             body.weight,
             body.height,
-            body.instructors
+            body.instructor
         ]
 
         db.query(query, values, function(err, results){
@@ -55,13 +55,23 @@ module.exports = {
         db.query(`SELECT members.*, coalesce(instructors.name,'') as instructor_name
                     FROM members 
                         LEFT JOIN instructors on members.instructor_id = instructors.id
-                   WHERE members.id = ($1)`, [id], function(err, results){
+                   WHERE members.id = $1`, [id], function(err, results){
 
             if (err) throw(`Erro ao buscar dados! ${err}`)
 
             callback(results.rows[0])
         })
     },
+
+    findBy(filter, callback){
+
+        db.query(`SELECT * FROM members 
+                  WHERE name ILIKE '%${filter}%' ORDER BY name`, function(err, results){
+            if (err) throw(`Erro ao buscar dados! ${err}`)
+
+            callback(results.rows)
+        })
+    },    
 
     update(body, callback){
         const query = ` 

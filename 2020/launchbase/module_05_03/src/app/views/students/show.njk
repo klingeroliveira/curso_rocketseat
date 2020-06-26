@@ -1,0 +1,70 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Students</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="card">
+
+        <section class="avatar" style="background: url({{ student.avatar_url }}) no-repeat center center / cover"></section>
+
+        <section class="dados">
+
+            <h3>Dados Estudante</h3>
+
+            <div class="item">
+                <div>Nome</div>
+                <div>{{ student.nome }}</div>
+            </div>
+
+            <div class="item">
+                <div>E-mail</div>
+                <div>{{ student.email }}</div>
+            </div>
+
+            <div class="item">
+                <div>Idade</div>
+                <div>
+                    {{ student.data_nascimento }}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Ano Escolar</div>
+                <div>
+                    {{ student.ano_escolar }}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Carga Horária Semanal</div>
+                <div>
+                    {{ student.carga_horaria }}
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Aluno de</div>
+                <div>
+                    {{ student.teacher_nome }}
+                </div>
+            </div>
+
+            <div class="show_buttons">
+
+                <a href="/students/{{ student.id }}/edit" class="edit_button">EDITAR</a>
+
+                <form id="form-delete" method="POST" action="/students?_method=DELETE">
+                    <input type="hidden" name="id" value="{{ student.id }}">
+                    <button type="submit" id="delete_button">DELETE</button>
+                </form>
+            </div>
+
+            {% include "../confirm.njk"%}
+        </section>
+
+    </div>
+
+{% endblock content %}

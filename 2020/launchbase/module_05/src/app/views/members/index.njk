@@ -3,8 +3,21 @@
 {% block content %}
 
     <div class="card table-container">
-        
-        <a href="/members/create">Novo</a>
+        <div class="header">
+            
+            <a class="button" href="/members/create">Novo</a>
+            
+            <form action="/members/" method="get">
+
+                <input type="text" 
+                        name="filter" 
+                        placeholder="Nome" 
+                        value={{filter}}>
+
+                <button type="submit">Pesquisar</button>
+
+            </form>
+        </div>
 
         <table >
             <thead>

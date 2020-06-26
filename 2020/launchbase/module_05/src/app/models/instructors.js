@@ -9,12 +9,11 @@ module.exports = {
                     FROM instructors
                         left join members on instructors.id = members.instructor_id
                     group by instructors.id
-                    ORDER BY number_students desc, instructors.name`, function(err, results){
+                    ORDER BY instructors.name`, function(err, results){
             if (err) throw(`Erro ao buscar dados! ${err}`)
 
             callback(results.rows)
         })
-
     },
 
     create(body, callback){
@@ -57,6 +56,21 @@ module.exports = {
         })
     },
 
+    findBy(filter, callback){
+
+        db.query(`SELECT instructors.*, count(members) as number_students
+                  FROM instructors
+                        left join members on instructors.id = members.instructor_id
+                  WHERE instructors.name ILIKE '%${filter}%'
+                        OR  instructors.services ILIKE '%${filter}%'
+                  group by instructors.id
+                  ORDER BY instructors.name`, function(err, results){
+            if (err) throw(`Erro ao buscar dados! ${err}`)
+
+            callback(results.rows)
+        })
+    },
+
     update(body, callback){
         const query = ` 
             UPDATE instructors SET
@@ -90,6 +104,33 @@ module.exports = {
             if (err) throw(`Erro ao apagar dados! ${err}`)
 
             callback()
+        })
+    },
+
+    paginate(params){
+
+        const { filter, limit, offset, callback } = params
+
+        let query = `
+        SELECT instructors.*, count(members) as number_students
+        FROM instructors
+            left join members on instructors.id = members.instructor_id
+        `
+
+        if (filter) {
+            query = `${query}
+            WHERE instructors.name ILIKE '%${filter}%'
+                OR  instructors.services ILIKE '%${filter}%'
+            `
+        }
+
+        query = `${query}
+        GROUP BY instructors.id LIMIT $1 OFFSET $2
+        `
+        db.query(query, [limit, offset], function(err, results){
+            if (err) throw(`Erro ao consultar Professores! ${err}`)
+
+            return callback(results.rows)
         })
     }
 }
