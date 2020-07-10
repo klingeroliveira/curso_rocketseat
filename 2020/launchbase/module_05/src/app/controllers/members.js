@@ -6,17 +6,29 @@ module.exports = {
 
     index(req,res){
 
-        const {filter} = req.query
+        let { filter, page, limit } = req.query
+        
+        page = page || 1
+        limit = limit || 3
+        let offset = limit * (page - 1)
 
-        if (filter){
-            Members.findBy(filter,function(members){
-                return res.render("members/index", { members, filter })
-            })
-        } else {
-            Members.all(function(members){
-                return res.render("members/index", { members })
-            })
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(members){
+                
+                const pagination = {
+                    total: Math.ceil( +members[0].total / limit),
+                    page                    
+                }
+                
+                return res.render("members/index", { members, pagination, filter })
+            }
         }
+
+        Members.paginate(params)
     },
 
     create(req,res){

@@ -9,8 +9,8 @@ module.exports = {
         let { filter, page, limit } = req.query
         
         page = page || 1
-        limit = limit || 2
-        offset = limit * (page - 1)
+        limit = limit || 3
+        let offset = limit * (page - 1)
 
         const params = {
             filter,
@@ -18,22 +18,17 @@ module.exports = {
             limit,
             offset,
             callback(instructors){
-                return res.render("instructors/index", { instructors, filter })
+                
+                const pagination = {
+                    total: Math.ceil( +instructors[0].total / limit),
+                    page                    
+                }
+                
+                return res.render("instructors/index", { instructors, pagination, filter })
             }
         }
 
-        Instructors.paginate(params)        
-        
-        /* if (filter){
-        
-            Instructors.findBy(filter, function(instructors) {
-                return res.render("instructors/index", { instructors, filter })
-            })            
-        } else {
-            Instructors.all(function(instructors) {
-                return res.render("instructors/index", { instructors })
-            })
-        }    */
+        Instructors.paginate(params)
     },
 
     create(req,res){
