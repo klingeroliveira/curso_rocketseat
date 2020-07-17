@@ -152,7 +152,7 @@ module.exports = {
         `
         
         db.query(query, [limit, offset], function(err, results){
-            if (err) throw(`Erro ao consultar Professores! ${err}`)
+            if (err) throw(`Erro ao consultar Membros! ${err}`)
             
             return callback(results.rows)
         })

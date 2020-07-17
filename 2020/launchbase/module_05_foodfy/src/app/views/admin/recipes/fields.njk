@@ -1,0 +1,82 @@
+<div class="item">
+    <div>Imagem da receita</div>
+    <div>
+        <input type="text" 
+               name="image" 
+               value="{{ item.image }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Título da Receita</div>
+    <div> 
+        <input type="text" 
+               name="title" 
+               value="{{ item.title }}"> 
+    </div>
+</div>
+
+<div class="item">
+    <div>Autor da Receita</div>
+    <div> 
+        <input type="text" 
+               name="author" 
+               value="{{ item.author }}"> 
+    </div>
+</div>
+
+<div class="item" id="ingredientes">
+    <div>Ingredientes</div>
+    {% if not item %}
+        <div class="ingrediente" >
+            <input type="text" 
+                   name="ingredients[]" 
+                   value="{{ ingredient }}" >
+        </div>
+    {% else %}
+        {% for ingredient in item.ingredients %}
+            <div class="ingrediente" >
+                <input type="text" 
+                    name="ingredients[]" 
+                    value="{{ ingredient }}" >
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<button type="button" 
+        class="add_ingredientes">Adicionar novo ingrediente
+</button>
+
+<div class="item" id="passos">
+    <div>Modo de preparo</div>
+
+    {% if not item %}
+        <div class="passo">
+            <input type="text" 
+                   name="preparation[]">
+        </div>
+    {% else %}
+        {% for preparation in item.preparation %}
+            <div class="passo">
+                <input type="text" 
+                    name="preparation[]" 
+                    value="{{ preparation }}">
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+<button type="button" 
+        class="add_passos">Adicionar novo passo
+</button>
+
+<div class="item">
+    <div>Informações adicionais</div>
+    <div>
+        <textarea name="information" 
+                  class="inf_adicionais">{{ item.information }}
+        </textarea>
+    </div>
+</div>
