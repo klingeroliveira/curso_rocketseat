@@ -3,6 +3,7 @@ const data = require('./config/data.json')
 const routes = express.Router()
 
 const receitas = require("./app/controllers/receitas")
+const chefs = require("./app/controllers/chefs")
 
 routes.get("/", function(req, res){
     return res.render("site/home", { items: data.receitas })
@@ -43,9 +44,13 @@ routes.post("/admin/recipes", receitas.post)
 routes.put("/admin/recipes", receitas.update)
 routes.delete("/admin/recipes", receitas.delete)
 
-routes.get("/admin/chefs", function(req, res){
-    return res.render("admin/chefs/chefs")
-})
+
+routes.get("/admin/chefs", chefs.index)
+routes.get("/admin/chefs/create", chefs.create)
+routes.get("/admin/chefs/:id", chefs.show)
+routes.get("/admin/chefs/:id/edit", chefs.edit)
+
+routes.post("/admin/chefs", chefs.post)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")

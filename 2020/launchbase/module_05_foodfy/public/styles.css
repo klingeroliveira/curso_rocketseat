@@ -493,3 +493,67 @@ h3 {
     color: var(--collor-background-button);
 }
 
+/*===ADMIN CHEFS===*/
+
+.cards_admin_list_chefs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    max-width: 940px;
+    gap: 0px 20px;
+    margin: 30px auto;
+}
+
+.card_admin_chef {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0px 20px;
+    align-items: center;
+}
+
+.card_admin_chef_img img{
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid white;
+}
+
+.card_admin_chef_content{
+    font-family: 'Roboto';
+    font-size: 18px;
+    color: var(--collor-text-title);
+    margin-bottom: 10px;
+}
+
+.card_admin_chef .button {
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    color: var(--collor-background-button);
+}
+
+.show_admin_chef {
+    text-align: center;
+}
+
+.show_admin_chef_img img{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid white;
+}
+
+.show_admin_chef_name {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 36px;
+    color: var(--collor-text-title);
+}
+
+.show_admin_chef_recipes {
+    font-family: Roboto;
+    font-size: 20px;
+    color: #777777;
+}

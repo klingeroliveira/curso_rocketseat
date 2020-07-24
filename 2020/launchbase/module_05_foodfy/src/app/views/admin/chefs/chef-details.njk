@@ -1,0 +1,53 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+    
+    <section>
+        <div class="show_admin_chef" id={{items.chef_id}}>
+
+            <div class="show_admin_chef_img">
+                <img src="{{items.chef_image}}" alt="">
+            </div>
+
+            <div class="show_admin_chef_name">
+                <p>{{items.chef_name}}</p>
+            </div>
+
+            <div class="show_admin_chef_recipes">
+                <p>{{items.chef_total_recipes}} Receitas</p>
+            </div>
+
+        </div>
+    </section>
+
+         
+
+    <section class="cards_admin">
+
+        <h3>Receitas</h3> 
+
+        {% for item in items %}
+        
+            <div class="card_admin" id={{item.recipes_id}}>
+                <section>
+                    <div class="card_admin_img">
+                        <img src="{{item.recipes_image}}" alt="">
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="card_admin_content">
+                        <p class="p_card_content">{{item.recipes_title}}</p>
+                    </div>
+                    <div class="card_admin_info">
+                        <p class="p_card_info">{{item.chef_name}}</p>
+                    </div>
+                    <a href="recipes/{{item.recipes_id}}" class="button">Visualizar</a>
+                </section>
+            </div>
+        {% endfor %}
+
+    </section>
+
+
+{% endblock %}

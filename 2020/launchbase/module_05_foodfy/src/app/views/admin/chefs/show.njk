@@ -1,0 +1,12 @@
+
+{% extends "admin/chefs/chef-details.njk" %}
+
+{% block topButton %}
+
+        <section class="cabecalho">
+                <h3>Chef: {{ items.chef_name }}</h3>
+                <div></div>
+                <a href="/admin/chefs/{{ items.chef_id }}/edit" class="button">Editar Chef</a>
+        </section>
+
+{% endblock topButton %}
