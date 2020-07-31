@@ -1,5 +1,6 @@
 const cards = document.querySelectorAll('.card');
 const detailsRecipe = document.querySelectorAll('a.expandDetails');
+const formEditChef = document.querySelector('#formEditChef');
 const formEditRecipe = document.querySelector('#formEditRecipe');
 const paginaAtual = location.pathname
 const menuItens = document.querySelectorAll("header .menu a")
@@ -84,14 +85,33 @@ const button_salvar_edit = document.querySelector("button[name=button_salvar_edi
 const button_delete_edit = document.querySelector("button[name=button_delete_edit]")
 
 if (button_salvar_edit){
+    
     button_salvar_edit.addEventListener("click", function(){
-        formEditRecipe.setAttribute("action", "/admin/recipes?_method=PUT")
+        
+        if (formEditChef){
+        
+            formEditChef.setAttribute("action", "/admin/chefs?_method=PUT")
+        
+        } else if (formEditRecipe){
+        
+            formEditRecipe.setAttribute("action", "/admin/recipes?_method=PUT")
+        }
     })
 }
 
 if (button_delete_edit){
+    
     button_delete_edit.addEventListener("click", function(){
-        formEditRecipe.setAttribute("action", "/admin/recipes?_method=DELETE")
+    
+        if (formEditChef){
+    
+            formEditChef.setAttribute("action", "/admin/chefs?_method=DELETE")
+    
+        } else if (formEditRecipe){
+    
+            formEditRecipe.setAttribute("action", "/admin/recipes?_method=DELETE")
+        }
+        
     })
 }
 //******* */

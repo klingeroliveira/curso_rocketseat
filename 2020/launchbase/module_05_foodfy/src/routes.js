@@ -51,6 +51,7 @@ routes.get("/admin/chefs/:id", chefs.show)
 routes.get("/admin/chefs/:id/edit", chefs.edit)
 
 routes.post("/admin/chefs", chefs.post)
+routes.put("/admin/chefs", chefs.put)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")

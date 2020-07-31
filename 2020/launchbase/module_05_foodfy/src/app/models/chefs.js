@@ -5,7 +5,7 @@ module.exports = {
 
     all(callback){
 
-        const query = `SELECT * FROM chefs`
+        const query = `SELECT * FROM chefs order by name`
 
         db.query(query,function(err, results){
             if (err) throw(`Erro ao listar Chefs! ${err}`)
@@ -67,14 +67,14 @@ module.exports = {
     update(body, callback){
         const query = `
             update chefs set
-                name = $2
+                name = $2,
                 avatar_url = $3
             where id = $1`
         
         const values = [
+            body.id,
             body.name,
-            body.avatar_url,
-            body.id
+            body.avatar_url
         ]
 
         db.query(query,values, function(err){

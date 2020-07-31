@@ -1,5 +1,6 @@
 
 const Chefs = require('../models/chefs')
+const { render } = require('nunjucks')
 
 module.exports = {
 
@@ -51,11 +52,13 @@ module.exports = {
         const keys = Object.keys(req.body)
 
         for(key of keys){
-            if (req.body[key] = ""){
+            if (req.body[key] == "" && key != "button_salvar_edit"){
                 return res.send("Preencha todos os campos")
             }
         }
 
-        Chefs.update(req.body)
+        Chefs.update(req.body, function(){
+            return res.redirect(`admin/chefs/${req.body.id}`)
+        })
     }
 }
