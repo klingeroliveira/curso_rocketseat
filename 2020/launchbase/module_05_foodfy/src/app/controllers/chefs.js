@@ -1,6 +1,5 @@
 
 const Chefs = require('../models/chefs')
-const { render } = require('nunjucks')
 
 module.exports = {
 
@@ -28,7 +27,8 @@ module.exports = {
         }
 
         Chefs.create(req.body, function(id){
-            return res.redirect(`admin/chefs/${id}`)
+            
+            return res.redirect(`/admin/chefs/${id}`)
         })
     },
 
@@ -58,7 +58,19 @@ module.exports = {
         }
 
         Chefs.update(req.body, function(){
-            return res.redirect(`admin/chefs/${req.body.id}`)
+            return res.redirect(`/admin/chefs/${req.body.id}`)
+        })
+    },
+
+    delete(req,res){
+        Chefs.cheqDelete(req.body.id, function(chef){
+            if (chef){
+                return res.send("Não é possível deletar, Chef possui receitas!")
+            } else {
+                Chefs.delete(req.body.id, function(){
+                    return res.redirect("/admin/chefs")
+                })
+            }
         })
     }
 }

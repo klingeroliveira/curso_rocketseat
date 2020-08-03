@@ -1,0 +1,78 @@
+const fs = require('fs')
+const data = require('../../config/data.json')
+
+const Recipes = require('../models/recipes')
+
+module.exports = {
+
+    index(req,res){
+        Recipes.all(function(recipes){
+            return res.render("admin/recipes/index", { items: recipes } )
+        })
+    },
+
+    create(req,res){
+        Recipes.chefSelectedOptions(function(chefs){
+            return res.render("admin/recipes/create", {chefs})
+        })
+    },
+
+    post(req,res) {
+
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if(req.body[key] == "")
+                return res.send("Preencha todos os campos!")
+        }
+
+        Recipes.insert(req.body, function(id){
+            return res.redirect(`/admin/recipes/${id}`)
+        })
+    },
+
+    show(req, res) {
+        
+        Recipes.find(req.params.id, function(recipe){
+            if (!recipe) return res.send("Receita não encontrada!")
+
+            return res.render("admin/recipes/show", {item: recipe})
+        })
+
+    },
+
+    edit(req, res) {
+
+        Recipes.find(req.params.id, function(recipe){
+            if (!recipe) return res.send("Receita não encontrada!")
+
+            Recipes.chefSelectedOptions(function(chefs){
+                return res.render("admin/recipes/edit", {recipe, chefs} )        
+            })
+        })
+    },
+
+    put(req,res) {
+
+        Recipes.update(req.body, function(){
+            return res.redirect(`/admin/recipes/${req.body.id}`)
+        })
+
+    },
+
+    delete(req,res) {
+        const {id} = req.body
+
+        const localizarReceita = data.receitas.filter(function(receita){
+            return receita.id != id
+        })
+
+        data.receitas = localizarReceita
+
+        fs.writeFile("src/config/data.json", JSON.stringify(data, null, 2), function(err){
+            if (err) return res.send(`Erro apagar registro! ${err}`)
+
+            return res.redirect("/admin/recipes")
+        })
+    }
+}

@@ -2,7 +2,7 @@ const express = require("express")
 const data = require('./config/data.json')
 const routes = express.Router()
 
-const receitas = require("./app/controllers/receitas")
+const recipes = require("./app/controllers/recipes")
 const chefs = require("./app/controllers/chefs")
 
 routes.get("/", function(req, res){
@@ -35,14 +35,14 @@ routes.get("/recipes/:index", function (req, res) {
 routes.get("/admin", function(req, res){
     return res.render("admin/layout")
 })
-routes.get("/admin/recipes", receitas.index)
-routes.get("/admin/recipes/create", receitas.create)
-routes.get("/admin/recipes/:id", receitas.show)
-routes.get("/admin/recipes/:id/edit", receitas.edit)
+routes.get("/admin/recipes", recipes.index)
+routes.get("/admin/recipes/create", recipes.create)
+routes.get("/admin/recipes/:id", recipes.show)
+routes.get("/admin/recipes/:id/edit", recipes.edit)
 
-routes.post("/admin/recipes", receitas.post)
-routes.put("/admin/recipes", receitas.update)
-routes.delete("/admin/recipes", receitas.delete)
+routes.post("/admin/recipes", recipes.post)
+routes.put("/admin/recipes", recipes.put)
+routes.delete("/admin/recipes", recipes.delete)
 
 
 routes.get("/admin/chefs", chefs.index)
@@ -52,6 +52,7 @@ routes.get("/admin/chefs/:id/edit", chefs.edit)
 
 routes.post("/admin/chefs", chefs.post)
 routes.put("/admin/chefs", chefs.put)
+routes.delete("/admin/chefs", chefs.delete)
 
 routes.use(function(req,res){
     res.status(404).render("not-found")

@@ -32,8 +32,8 @@ module.exports = {
 
         db.query(query, values, function(err,results){
             if (err) throw(`Erro ao gravar Chef! ${err}`)
-
-            callback(results.rows[0])
+            
+            callback(results.rows[0].id)
         })
     },
 
@@ -44,10 +44,10 @@ module.exports = {
                     chefs.name as chef_name, 
                     chefs.avatar_url chef_image, 
                     
-                    coalesce( (select count(rt.id) 
+                    coalesce( (select count(rt.chef_id)
                                 from recipes rt
                                 where rt.chef_id = chefs.id 
-                                group by rt.id)
+                                group by rt.chef_id)
                             ,0) as chef_total_recipes,
 
                     recipes.id as recipes_id,
@@ -79,6 +79,32 @@ module.exports = {
 
         db.query(query,values, function(err){
             if (err) throw(`Erro ao editar Chef! ${err}`)
+
+            callback()
+        })
+    },
+
+    cheqDelete(id,callback){
+        const query= `
+            select * from chefs
+             where chefs.id = $1
+                and exists (select distinct 1 from recipes 
+                            where recipes.chef_id = chefs.id)`
+        db.query(query, [id], function(err, results){
+            if (err) throw(`Erro ao checar Chef! ${err}`)
+
+            callback(results.rows[0])
+        })
+    },
+
+    delete(id, callback){
+        const query= `delete from chefs
+                where chefs.id = $1
+                and not exists (select distinct 1 from recipes 
+                                 where recipes.chef_id = chefs.id)`
+
+        db.query(query, [id], function(err){
+            if (err) throw(`Erro ao deletar Chef! ${err}`)
 
             callback()
         })
