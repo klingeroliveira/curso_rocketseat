@@ -61,17 +61,8 @@ module.exports = {
     },
 
     delete(req,res) {
-        const {id} = req.body
-
-        const localizarReceita = data.receitas.filter(function(receita){
-            return receita.id != id
-        })
-
-        data.receitas = localizarReceita
-
-        fs.writeFile("src/config/data.json", JSON.stringify(data, null, 2), function(err){
-            if (err) return res.send(`Erro apagar registro! ${err}`)
-
+        
+        Recipes.delete(req.body.id, function(){
             return res.redirect("/admin/recipes")
         })
     }

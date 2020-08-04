@@ -40,27 +40,37 @@ module.exports = {
     find(id, callback){
         
         const query = `
-                select chefs.id as chef_id, 
-                    chefs.name as chef_name, 
-                    chefs.avatar_url chef_image, 
+                select chefs.id, 
+                    chefs.name, 
+                    chefs.avatar_url, 
                     
                     coalesce( (select count(rt.chef_id)
                                 from recipes rt
                                 where rt.chef_id = chefs.id 
                                 group by rt.chef_id)
-                            ,0) as chef_total_recipes,
-
-                    recipes.id as recipes_id,
-                    recipes.image as recipes_image,
-                    title as recipes_title
+                            ,0) as total_recipes
                 from chefs
-                    left join recipes on recipes.chef_id = chefs.id
                 where chefs.id = $1`
 
         db.query(query, [id], function(err, results){
             if (err) throw(`Erro ao buscar Chef! ${err}`)
 
             callback(results.rows[0])
+        })
+    },
+
+    findRecipes(id, callback){
+        
+        const query = `
+                select recipes.*, chefs.name as chef_name
+                from recipes
+                inner join chefs on recipes.chef_id = chefs.id
+                where recipes.chef_id = $1`
+
+        db.query(query, [id], function(err, results){
+            if (err) throw(`Erro ao buscar Chef! ${err}`)
+
+            callback(results.rows)
         })
     },
 

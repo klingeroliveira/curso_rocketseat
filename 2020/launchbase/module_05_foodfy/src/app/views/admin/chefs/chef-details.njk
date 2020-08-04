@@ -3,46 +3,45 @@
 {% block content %}
     
     <section>
-        <div class="show_admin_chef" id={{items.chef_id}}>
+        <div class="show_admin_chef" id={{chef.id}}>
 
             <div class="show_admin_chef_img">
-                <img src="{{items.chef_image}}" alt="">
+                <img src="{{chef.avatar_url}}" alt="">
             </div>
 
             <div class="show_admin_chef_name">
-                <p>{{items.chef_name}}</p>
+                <p>{{chef.name}}</p>
             </div>
 
             <div class="show_admin_chef_recipes">
-                <p>{{items.chef_total_recipes}} Receitas</p>
+                <p>{{chef.total_recipes}} Receitas</p>
             </div>
 
         </div>
     </section>
 
          
+    <div class="cards_admin_title_recipes"><h3 {% if recipes == "" %} style= "visibility: hidden;" {% endif %}> Receitas</h3></div>
+    
+    <section class="cards_admin"> 
 
-    <section class="cards_admin">
-
-        <h3>Receitas</h3> 
-
-        {% for item in items %}
+        {% for recipe in recipes %}
         
-            <div class="card_admin" id={{item.recipes_id}}>
+            <div class="card_admin" id={{recipe.id}}>
                 <section>
                     <div class="card_admin_img">
-                        <img src="{{item.recipes_image}}" alt="">
+                        <img src="{{recipe.image}}" alt="">
                     </div>
                 </section>
                 
                 <section>
                     <div class="card_admin_content">
-                        <p class="p_card_content">{{item.recipes_title}}</p>
+                        <p class="p_card_content">{{recipe.title}}</p>
                     </div>
                     <div class="card_admin_info">
-                        <p class="p_card_info">{{item.chef_name}}</p>
+                        <p class="p_card_info">{{recipe.chef_name}}</p>
                     </div>
-                    <a href="recipes/{{item.recipes_id}}" class="button">Visualizar</a>
+                    <a href="/admin/recipes/{{recipe.id}}" class="button">Visualizar</a>
                 </section>
             </div>
         {% endfor %}

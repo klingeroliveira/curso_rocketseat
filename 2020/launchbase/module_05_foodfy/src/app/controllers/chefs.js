@@ -1,5 +1,6 @@
 
 const Chefs = require('../models/chefs')
+const { end } = require('../../config/db')
 
 module.exports = {
 
@@ -36,15 +37,19 @@ module.exports = {
         Chefs.find(req.params.id, function(chef){
             if (!chef) return res.send("Chefe não encontrado!")
 
-            return res.render("admin/chefs/show", {items: chef})
+            Chefs.findRecipes(req.params.id, function(recipes){
+
+                return res.render("admin/chefs/show", {chef, recipes})
+            })
         })
     },
 
     edit(req,res){
+        
         Chefs.find(req.params.id, function(chef){
             if (!chef) return res.send("Chefe não encontrado!")
 
-            return res.render("admin/chefs/edit", {items: chef})
+            return res.render("admin/chefs/edit", {chef})
         })
     },
 
