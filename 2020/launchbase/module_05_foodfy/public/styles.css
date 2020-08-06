@@ -132,7 +132,7 @@
 }
 
 .card_img img{
-    max-width: 300px;
+    width: 300px;
     height: 140px;
     border-radius: 15px;
 }
@@ -264,9 +264,11 @@
     margin-top: 56px;
 }
 
-.recipe_img img{
+.recipe_img .img{
     border-radius: 15px;
-    max-width: 940px;
+    width: 940px;
+    height: 280px;
+    background-size: cover;
 }
 
 .recipe_content{
@@ -470,7 +472,7 @@ h3 {
 }
 
 .card_admin_img img{
-    max-width: 172px;
+    width: 172px;
     height: 80px;
     border-radius: 8.57px;
 }

@@ -1,11 +1,38 @@
-const fs = require('fs')
-const data = require('../../config/data.json')
-
 const Recipes = require('../models/recipes')
 
 module.exports = {
 
+    indexSite(req,res){
+
+        Recipes.listIndexSite(function (recipes) {
+            return res.render("site/home", { items: recipes })
+        })
+    },
+
+    aboutSite(req,res){
+
+        return res.render("site/about")
+    },
+
+    recipesSite(req, res){
+
+        Recipes.all(function(recipes){
+            return res.render("site/recipes", { items: recipes })
+        })
+    },
+
+    showRecipeSite(req,res){
+
+        Recipes.find(req.params.id, function(recipe){
+            
+            if (!recipe) return res.render("not-found");
+
+            return res.render("site/recipe-details", {item: recipe})
+        })
+    },
+
     index(req,res){
+        
         Recipes.all(function(recipes){
             return res.render("admin/recipes/index", { items: recipes } )
         })

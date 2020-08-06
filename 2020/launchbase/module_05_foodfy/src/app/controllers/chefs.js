@@ -1,6 +1,4 @@
-
 const Chefs = require('../models/chefs')
-const { end } = require('../../config/db')
 
 module.exports = {
 

@@ -8,10 +8,7 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.image,
-                recipes.title,
-                recipes.ingredients,
-                recipes.preparation,
-                recipes.information
+                recipes.title
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
         `
@@ -117,6 +114,25 @@ module.exports={
             if (err) throw(`Erro ao deletar Receita! ${err}`)
 
             callback()
+        })
+    },
+
+    listIndexSite(callback){
+
+        const query = `
+            Select recipes.chef_id,
+                chefs.name as author,
+                recipes.id,
+                recipes.image,
+                recipes.title
+            from recipes
+                inner join chefs on chefs.id = recipes.chef_id
+            limit 6
+        `
+        db.query(query, function(err,results){
+            if (err) throw(`Erro ao listar Receitas! ${err}`)
+
+            callback(results.rows)
         })
     }
 }
