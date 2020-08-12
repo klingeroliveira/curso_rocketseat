@@ -16,15 +16,23 @@ module.exports = {
 
     recipesSite(req, res){
 
-        Recipes.all(function(recipes){
-            return res.render("site/recipes", { items: recipes })
-        })
+        const {filter} = req.query
+
+        if (filter)
+        {
+            Recipes.all(filter, function(recipes){
+                return res.render("site/recipes", { items: recipes, filter })
+            })
+        } else {
+            Recipes.all("", function(recipes){
+                return res.render("site/recipes", { items: recipes, filter })
+            })
+        }
     },
 
     showRecipeSite(req,res){
-
-        Recipes.find(req.params.id, function(recipe){
-            
+        
+        Recipes.find(req.params.index, function(recipe){
             if (!recipe) return res.render("not-found");
 
             return res.render("site/recipe-details", {item: recipe})
@@ -33,7 +41,7 @@ module.exports = {
 
     index(req,res){
         
-        Recipes.all(function(recipes){
+        Recipes.all('', function(recipes){
             return res.render("admin/recipes/index", { items: recipes } )
         })
     },

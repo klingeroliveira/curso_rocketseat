@@ -2,6 +2,13 @@ const Chefs = require('../models/chefs')
 
 module.exports = {
 
+    indexSite(req, res){
+        Chefs.all(function(chefs){
+            return res.render("site/chefs", { items: chefs })
+        })
+        
+    },
+
     index(req, res){
         Chefs.all(function(chefs){
             return res.render("admin/chefs/index", { items: chefs })

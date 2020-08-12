@@ -1,10 +1,10 @@
-{% extends "admin/layout.njk" %}
+{% extends "site/layout.njk" %}
 
 {% block content %}
 
     <div class="recipe">
-        <div class="recipe_img">
-            <img src="{{item.image}}" alt="">
+        <div class="recipe_img" >
+            <div class="img" style="background-image: url( {{item.image}} );"></div>
         </div>
         <div class="recipe_content">
             <p class="p_recipe_content">{{item.title}}</p>

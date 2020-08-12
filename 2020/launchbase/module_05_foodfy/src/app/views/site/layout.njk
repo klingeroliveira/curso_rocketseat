@@ -4,13 +4,13 @@
 
 {% block head%}
     <title>Foodfy</title>
-
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/styles.css">
 {% endblock %}
 
 <body>
     <header class="menu_site">
-        <div class="menu_admin_content">
+        <div class="menu_content">
 
             <div class="logo">
                 <a href="/"><img src="/images/logo_site.png" alt="Logo"></a>
@@ -21,6 +21,17 @@
                 <a href="/recipes">Receitas</a>
                 <a href="/chefs">Chefs</a>
             </div>
+
+            <form action="/recipes" method="get" class="menu_find_recipes">
+                <input type="text" 
+                        name="filter" 
+                        placeholder="Buscar uma receita" 
+                        value="{{filter}}">
+                        
+                <button type="submit" 
+                        class="button">Buscar</button>
+            </form>
+           
         </div>
     </header>
 

@@ -2,8 +2,18 @@ const db = require('../../config/db')
 const {date} = require('../../lib/utils')
 
 module.exports={
-    all(callback){
-        const query = `
+    all(filter, callback){
+
+        let query = "",
+            filterQuery = ""
+
+        if (filter != ""){
+            filterQuery = `
+                where (recipes.title ILIKE '%${filter}%'
+                    or cast(recipes.ingredients as varchar) ILIKE '%${filter}%')
+        `}
+
+        query = `
             Select recipes.chef_id,
                 chefs.name as author,
                 recipes.id,
@@ -11,7 +21,9 @@ module.exports={
                 recipes.title
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
+            ${filterQuery}
         `
+
         db.query(query, function(err,results){
             if (err) throw(`Erro ao listar Receitas! ${err}`)
 
@@ -71,7 +83,7 @@ module.exports={
                 recipes.information
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
-            where recipes.id = cast($1 as int)
+            where recipes.id = $1
         `
 
         db.query(query, [id], function(err, results){

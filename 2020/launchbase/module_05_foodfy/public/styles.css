@@ -21,13 +21,13 @@
 /*===HEADER===*/
 .menu_site,
 .menu_admin {
-    margin: auto;
+    margin: 0px auto 50px;
     padding: 36px 0 0;
 }
 
-.menu_admin_content{
+.menu_content{
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 200px 1fr 345px;
     max-width: 940px;
     margin: auto;
 }
@@ -46,9 +46,13 @@
     color: darkgray; 
 }
 
-.logo a{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 28px;
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.menu{
+    align-self: center;
 }
 
 .menu a{
@@ -65,11 +69,27 @@
     color: white;
 }
 
+.menu_find_recipes{
+    display: flex;
+}
+.menu_find_recipes input{
+    width: 246px;
+    height: 37px;
+    background-color: #fff;
+    border: 1px solid #DDDDDD;
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 15px 10px;
+    margin-right: 8px;
+}
+
 /*====Home====*/
 .banner{
     max-width: 940px;
     height: 366px;
-    margin: 50px auto;
+    margin: 0px auto 50px auto;
     background-color: #FBDFDB;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -113,7 +133,7 @@
     margin-top: 50px;
 }
 
-/*====CARDS====*/
+/*====CARDS RECIPES====*/
 
 .cards {
     display: grid;
@@ -125,10 +145,11 @@
 
 .card{
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .card_img{
-    margin: 20px 0px;;
+    margin: 0 0 20px;;
 }
 
 .card_img img{
@@ -147,7 +168,7 @@
     font-family: 'Roboto';
     font-size: 14px;
     color: var(--collor-text-info);
-    padding: 5px 0px 10px;
+    padding: 5px 0px 0px;
 }
 
 /*===Modal===*/
@@ -218,7 +239,7 @@
 }
 
 .sobre_content h1{
-    margin: 50px 0 20px;
+    margin: 0 0 20px;
     font-size: 24px;
 }
 
@@ -356,6 +377,14 @@
 }
 
 
+/*===SITE CHEFS===*/
+
+.card_chef_recipes{
+    font-family: Roboto;
+    font-size: 14px;
+    color: #666666;
+}
+
 /*===ADMIN===*/
 
 header .admin{
@@ -374,13 +403,13 @@ h3 {
     display: grid;
     grid-template-columns: 1fr 92px 140px;
     align-items: center;
-    margin: 55px auto 24px auto;
+    margin: 0 auto;
     gap: 10px;
 }
 
-.cabecalho .button {
+.cabecalho .button,
+.menu_find_recipes .button {
     background-color: var(--collor-background-button);
-    width: 139px;
     height: 37px;
     border-radius: 4px;
     color: #fff;
@@ -391,6 +420,14 @@ h3 {
     text-align: center;
     text-decoration: none;
     line-height: 37px;
+}
+
+.cabecalho .button{
+    width: 139px;
+}
+
+.menu_find_recipes .button{
+    width: 91px;
 }
 
 .cabecalho .button_delete {
@@ -411,7 +448,7 @@ h3 {
 
 .dados {
     max-width: 940px;
-    margin: 55px auto;
+    margin: 0px auto;
 }
 
 .item {
@@ -460,7 +497,7 @@ h3 {
     grid-template-columns: 1fr 1fr;
     max-width: 940px;
     gap: 0px 20px;
-    margin: 30px auto;
+    margin: 30px auto 0px;
 }
 
 .card_admin {
@@ -505,22 +542,33 @@ h3 {
 
 /*===ADMIN CHEFS===*/
 
-.cards_admin_list_chefs {
+.cards_admin_list_chefs,
+.cards_list_chefs /*site*/ {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     max-width: 940px;
     gap: 0px 20px;
-    margin: 30px auto;
 }
 
-.card_admin_chef {
+.cards_admin_list_chefs {
+    margin: 30px auto 0px;
+}
+
+.cards_list_chefs /*site*/ {
+    margin: 0px auto;
+}
+
+.card_admin_chef,
+.card_chef /*site*/{
     display: grid;
     grid-template-columns: 64px 1fr;
     gap: 0px 20px;
     align-items: center;
+    margin-bottom: 30px;
 }
 
-.card_admin_chef_img img{
+.card_admin_chef_img img,
+.card_chef_img img /*site*/{
     height: 64px;
     width: 64px;
     border-radius: 100%;
@@ -528,14 +576,15 @@ h3 {
     border: 2px solid white;
 }
 
-.card_admin_chef_content{
+.card_admin_chef_content,
+.card_chef_content /*site*/{
     font-family: 'Roboto';
     font-size: 18px;
     color: var(--collor-text-title);
     margin-bottom: 10px;
 }
 
-.card_admin_chef .button {
+.card_admin_chef .button{
     text-decoration: none;
     font-size: 14px;
     font-family: 'Roboto';

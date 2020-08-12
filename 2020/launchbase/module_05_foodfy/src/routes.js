@@ -3,19 +3,13 @@ const routes = express.Router()
 
 const recipes = require("./app/controllers/recipes")
 const chefs = require("./app/controllers/chefs")
-const { recipesSite } = require("./app/controllers/recipes")
 
 routes.get("/", recipes.indexSite)
 routes.get("/about", recipes.aboutSite)
 routes.get("/recipes", recipes.recipesSite)
 routes.get("/recipes/:index", recipes.showRecipeSite)
 
-routes.get("/chefs", function(req, res){
-    return res.render("site/chefs")
-})
-
-
-
+routes.get("/chefs", chefs.indexSite)
 
 routes.get("/admin", function(req, res){
     return res.render("admin/layout")

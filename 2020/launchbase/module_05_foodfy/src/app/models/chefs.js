@@ -5,7 +5,17 @@ module.exports = {
 
     all(callback){
 
-        const query = `SELECT * FROM chefs order by name`
+        const query = `
+            select chefs.id, 
+                chefs.name, 
+                chefs.avatar_url, 
+                
+                coalesce( (select count(rt.chef_id)
+                            from recipes rt
+                            where rt.chef_id = chefs.id 
+                            group by rt.chef_id)
+                        ,0) as total_recipes
+            from chefs order by name`
 
         db.query(query,function(err, results){
             if (err) throw(`Erro ao listar Chefs! ${err}`)

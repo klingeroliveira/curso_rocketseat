@@ -8,6 +8,7 @@ const menuItens = document.querySelectorAll("header .menu a")
 for (let card of cards) {
     card.addEventListener("click", function () {
         const idCard = card.getAttribute("id");
+        console.log(idCard)
         window.location.href = `/recipes/${idCard}`;
     })
 }
