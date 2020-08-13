@@ -30,6 +30,7 @@
     grid-template-columns: 200px 1fr 345px;
     max-width: 940px;
     margin: auto;
+    height: 37px;
 }
 
 .menu_site a{
@@ -535,9 +536,18 @@ h3 {
     color: var(--collor-background-button);
 }
 
-.cards_admin_title_recipes{
+.cards_admin_title_recipes,
+.titleFind /*site*/{
     max-width: 940px;
     margin: auto;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 24px;
+    color: #111111;
+}
+
+.titleFind /*site*/{
+    margin-bottom: 20px;
 }
 
 /*===ADMIN CHEFS===*/
@@ -545,7 +555,7 @@ h3 {
 .cards_admin_list_chefs,
 .cards_list_chefs /*site*/ {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 220px 220px 220px 220px;
     max-width: 940px;
     gap: 0px 20px;
 }
@@ -616,4 +626,23 @@ h3 {
     font-family: Roboto;
     font-size: 20px;
     color: #777777;
+}
+
+/*===PAGINATION===*/
+.pagination {
+    margin: auto;
+    max-width: 940px;
+    text-align: center;
+}
+
+.pagination a,
+.pagination span {
+    color: var(--color-header-font);
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.pagination a:hover {
+    filter: brightness(0.3);
+    border-bottom: 1px solid var(--color-header-font);
 }

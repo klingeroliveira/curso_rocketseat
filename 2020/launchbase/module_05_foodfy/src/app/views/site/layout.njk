@@ -22,15 +22,8 @@
                 <a href="/chefs">Chefs</a>
             </div>
 
-            <form action="/recipes" method="get" class="menu_find_recipes">
-                <input type="text" 
-                        name="filter" 
-                        placeholder="Buscar uma receita" 
-                        value="{{filter}}">
-                        
-                <button type="submit" 
-                        class="button">Buscar</button>
-            </form>
+            {% block form_find_recipes %}
+            {% endblock form_find_recipes %}
            
         </div>
     </header>

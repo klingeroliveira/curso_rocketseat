@@ -16,18 +16,31 @@ module.exports = {
 
     recipesSite(req, res){
 
-        const {filter} = req.query
+        let {filter, page,limit} = req.query
 
-        if (filter)
-        {
-            Recipes.all(filter, function(recipes){
-                return res.render("site/recipes", { items: recipes, filter })
-            })
-        } else {
-            Recipes.all("", function(recipes){
-                return res.render("site/recipes", { items: recipes, filter })
-            })
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page-1),
+            titleFind = ""
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes){
+                const pagination = {
+                    total: Math.ceil( +recipes[0].total / limit),
+                    page
+                }
+                
+                if (filter) titleFind = `Buscando por "${filter}"`
+
+                return res.render("site/recipes", {items: recipes, filter, pagination, titleFind})
+            }
         }
+
+        Recipes.all(params)
     },
 
     showRecipeSite(req,res){
@@ -40,10 +53,36 @@ module.exports = {
     },
 
     index(req,res){
-        
+
+        let {filter, page,limit} = req.query
+
+        page = page || 1
+        limit = limit || 4
+        let offset = limit * (page-1),
+            titleFind = ""
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes){
+                const pagination = {
+                    total: Math.ceil( +recipes[0].total / limit),
+                    page
+                }
+                
+                if (filter) titleFind = `Buscando por "${filter}"`
+
+                return res.render("admin/recipes/index", {items: recipes, filter, pagination, titleFind})
+            }
+        }
+
+        Recipes.all(params)
+        /*
         Recipes.all('', function(recipes){
             return res.render("admin/recipes/index", { items: recipes } )
-        })
+        })*/
     },
 
     create(req,res){

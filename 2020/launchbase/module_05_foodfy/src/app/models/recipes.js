@@ -2,29 +2,41 @@ const db = require('../../config/db')
 const {date} = require('../../lib/utils')
 
 module.exports={
-    all(filter, callback){
+    all(params){
+
+        const {filter, limit, offset, callback} = params
 
         let query = "",
-            filterQuery = ""
+            filterQuery = "",
+            totalQuery = `(select count(*) from recipes) as total`
 
-        if (filter != ""){
+        if (filter){
             filterQuery = `
                 where (recipes.title ILIKE '%${filter}%'
                     or cast(recipes.ingredients as varchar) ILIKE '%${filter}%')
-        `}
+            `
+
+            totalQuery = `
+                (select count(*) from recipes
+                    ${filterQuery}
+                ) as total
+            `
+        }
 
         query = `
             Select recipes.chef_id,
                 chefs.name as author,
                 recipes.id,
                 recipes.image,
-                recipes.title
+                recipes.title,
+                ${totalQuery}
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
             ${filterQuery}
+            LIMIT $1 OFFSET $2
         `
 
-        db.query(query, function(err,results){
+        db.query(query,[limit,offset], function(err,results){
             if (err) throw(`Erro ao listar Receitas! ${err}`)
 
             callback(results.rows)
