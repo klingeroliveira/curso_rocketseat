@@ -1,5 +1,5 @@
 <div class="item">
-    <div>Categoria {{productId}}</div>
+    <div>Categoria</div>
     <div>
         <select name="category_id">
 
@@ -24,16 +24,14 @@
             type="text" 
             name="name" 
             placeholder="Digite o Título do Anúncio"
-            value="{{ produt.name }}">
+            value="{{ product.name }}">
         </div>
 </div>
 
 <div class="item">
     <div>Descrição</div>
     <div>
-        <textarea name="description">
-            {{ product.description }}
-        </textarea>
+        <textarea name="description">{{ product.description }}</textarea>
 </div>
 
 {# campo foto #}
@@ -45,12 +43,12 @@
             type="text" 
             name="price" 
             placeholder="Preço do Produto"
-            value="{{ product.price }}">
-            {# faremos uma máscara monetária #}
+            value="{{ product.price }}"
+            onkeydown="Mask.apply(this, 'formatBRL')" >
     </div>
 
     {% if product.old_price %}
-        <input type="hidden" name="olde_price" value={{product.old_price}}>
+        <input type="hidden" name="old_price" value={{product.old_price}}>
     {% endif %}
 
 </div>

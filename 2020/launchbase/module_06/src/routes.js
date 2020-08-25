@@ -7,7 +7,11 @@ routes.get('/', function(req,res){
 })
 
 routes.get('/products/create', ProductController.create)
+routes.get('/products/:id/edit', ProductController.edit)
+
+routes.put('/products', ProductController.put)
 routes.post('/products', ProductController.post)
+routes.delete('/products', ProductController.delete)
 
 // Alias
 routes.get('/ads/create', function(req,res){
