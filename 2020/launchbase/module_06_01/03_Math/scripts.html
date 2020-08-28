@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // callback
+    function printDoubleCallback(number) {
+      setTimeout(() => {
+        console.log(number * 2)
+      }, Math.floor(Math.random() * 100) + 1)
+    }
+
+    function printAllCallback() {
+
+      printDoubleCallback(5)
+      printDoubleCallback(10)
+      printDoubleCallback(22)
+      printDoubleCallback(1)
+      printDoubleCallback(89)
+    }
+
+    //printAllCallback()
+
+    function printDoublePromisse(numero) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (Number.isInteger(numero)) {
+            resolve(numero * 2)
+          } else {
+            reject('Não é um valor inteiro. Digite um número!')
+          }
+        }, Math.floor(Math.random() * 100) + 1)
+      })
+    }
+
+    printDoublePromisse('r')
+      .then((resolve) => {
+        console.log(result)
+      })
+      .then(printDoublePromisse(10))
+      .catch((reject) => {
+        console.log(reject)
+      })
+
+  </script>
+</body>
+
+</html>
