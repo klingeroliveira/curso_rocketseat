@@ -1,6 +1,5 @@
 const db = require('../../config/db')
 const { date } = require('../../lib/utils')
-const { DateTimeFormat } = require('intl')
 
 module.exports = {
     create(data){
@@ -53,10 +52,10 @@ module.exports = {
                 old_price = ($6),
                 price = ($7),
                 quantity = ($8),
-                status = ($9),
-                updated_at = ($10)
+                status = ($9)
             where id = ($1)
         `
+        
 
         const values = [
             data.id,
@@ -67,8 +66,7 @@ module.exports = {
             data.old_price,
             data.price,
             data.quantity,
-            data.status,
-            date(Date.now()).iso
+            data.status
         ]
 
         return db.query(query,values)
