@@ -1,0 +1,12 @@
+<script>
+
+/// confirmação para apagar
+document.querySelector(".button_delete").addEventListener("click", function (event){
+    const confirmation = confirm("Deseja apagar o cadastro?");
+    if (!confirmation) {
+        event.preventDefault();
+    }
+})
+/// confirmação para apagar
+
+</script>

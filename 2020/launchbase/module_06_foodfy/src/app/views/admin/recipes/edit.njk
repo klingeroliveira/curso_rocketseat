@@ -1,0 +1,24 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %} 
+
+    <form id="formEditRecipe" method="Post"> 
+
+        <section class="cabecalho">
+            <h3>Alterando receita</h3>
+
+            <input type="hidden" name="id" value="{{ recipe.id }}">
+            <button type="submit" name="button_delete_edit" class="button_delete">Deletar</button>
+            <button type="submit" name="button_salvar_edit" class="button">Salvar receita</button>
+        </section>
+
+        <section class="dados">
+            {% include "admin/recipes/fields.njk" %}
+        </section>
+
+    </form>
+
+    {% include "admin/confirm-delete.njk"%}
+
+
+{% endblock %}

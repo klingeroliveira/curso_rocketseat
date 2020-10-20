@@ -1,0 +1,28 @@
+{% extends "site/layout.njk" %}
+
+{% block content %}
+
+    <section class="cards_list_chefs">
+        {% for item in items %}
+        
+            <div class="card_chef" id="{{item.id}}">
+                <section>
+                    <div class="card_chef_img">
+                        <img src="{{item.avatar_url}}" alt="">
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="card_chef_content">
+                        <p class="p_card_content">{{item.name}}</p>
+                    </div>
+                    <div class="card_chef_recipes">
+                        <p>{{item.total_recipes}} Receitas</p>
+                    </div>
+                </section>
+            </div>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

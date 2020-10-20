@@ -1,0 +1,52 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+    
+    <section>
+        <div class="show_admin_chef" id={{chef.id}}>
+
+            <div class="show_admin_chef_img">
+                <img src="{{chef.avatar_url}}" alt="">
+            </div>
+
+            <div class="show_admin_chef_name">
+                <p>{{chef.name}}</p>
+            </div>
+
+            <div class="show_admin_chef_recipes">
+                <p>{{chef.total_recipes}} Receitas</p>
+            </div>
+
+        </div>
+    </section>
+
+         
+    <div class="cards_admin_title_recipes"><p {% if recipes == "" %} style= "visibility: hidden;" {% endif %}> Receitas</p></div>
+    
+    <section class="cards_admin"> 
+
+        {% for recipe in recipes %}
+        
+            <div class="card_admin" id={{recipe.id}}>
+                <section>
+                    <div class="card_admin_img">
+                        <img src="{{recipe.image}}" alt="">
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="card_admin_content">
+                        <p class="p_card_content">{{recipe.title}}</p>
+                    </div>
+                    <div class="card_admin_info">
+                        <p class="p_card_info">{{recipe.chef_name}}</p>
+                    </div>
+                    <a href="/admin/recipes/{{recipe.id}}" class="button">Visualizar</a>
+                </section>
+            </div>
+        {% endfor %}
+
+    </section>
+
+
+{% endblock %}
