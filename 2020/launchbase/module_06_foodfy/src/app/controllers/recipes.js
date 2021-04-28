@@ -108,8 +108,10 @@ module.exports = {
         let results = await Recipes.create(req.body)
         const recipesId = results.rows[0].id
 
+        console.log(req.files)
+
         const filesPromise = req.files.map(file=>
-            files.create({...file, recipes_id: recipesId})
+            Files.create({...file, recipes_id: recipesId})
         )
 
         await Promise.all(filesPromise)
@@ -139,12 +141,48 @@ module.exports = {
         })
     },
 
-    put(req,res) {
+    async put(req,res) {
 
-        Recipes.update(req.body, function(){
-            return res.redirect(`/admin/recipes/${req.body.id}`)
-        })
+        const keys = Object.keys(req.body)
+        
 
+        for (key of keys) {
+            console.log(key + req.body[key])
+            if (req.body[key] == "" && key != "removed_files")
+                return res.send("Preencha todos os campos.")
+        }
+
+        if(req.body.removed_files) {
+            const removedFiles = req.body.removed_files.split(",")
+            const lastIndex = removedFiles.length - 1
+            removedFiles.splice(lastIndex, 1)
+
+            const removedFilesPromise = removedFiles.map(id => Files.delete(id))
+
+            await Promise.all(removedFilesPromise)
+        }
+
+
+        if (req.files.length != 0){
+
+            //validar se já não existem 6 imagens no total
+
+            const oldFiles = await Product.files(req.body.id)
+            const totalFiles = oldFiles.rows.length + req.files.length
+
+            if (totalFiles <= 6){
+
+                const newFilesPromise = req.files.map(file => 
+                    Files.create({...file, product_id: req.body.id}))
+
+                await Promise.all(newFilesPromise)
+            }
+        }
+
+       
+        await Recipes.update(req.body)
+
+        return res.redirect(`/admin/recipes/${req.body.id}`)
     },
 
     delete(req,res) {

@@ -654,7 +654,7 @@ h3 {
 
 form .item #photos-upload {
     position: relative;
-    display: table;
+    display: block;
 
     overflow: hidden;
     width: 150px;
