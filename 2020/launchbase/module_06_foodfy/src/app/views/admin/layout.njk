@@ -5,25 +5,13 @@
 {% block head%}
     <title>Foodfy</title>
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
 {% endblock %}
 
 <body>
-    <header class="menu_admin">
-        <div class="menu_content">
-
-            <div class="logo">
-                <a href="/admin"><img src="/images/logo_admin.png" alt="Logo"></a>
-            </div>
-            
-            <div class="menu">
-                <a href="/admin/recipes">Receitas</a>
-                <a href="/admin/chefs">Chefs</a>
-            </div>
-
-        </div>
-        
-    </header>
+    
+    {%include "admin/parts/header.njk"%}}
 
     {% block topButton %}
     {% endblock topButton %}
@@ -31,11 +19,7 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="footer">
-        <div class="text_footer">
-            <p>Todos os direitos reservados, receitas Foodfy.</p>
-        </div>
-    </footer>
+    {%include "admin/parts/footer.njk"%}}
 
     <script src="/scripts.js"></script>
 </body>

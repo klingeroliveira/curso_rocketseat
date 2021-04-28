@@ -28,6 +28,7 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.title,
+                recipes.image,
                 ${totalQuery}
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
@@ -59,7 +60,7 @@ module.exports={
                 preparation,
                 information,
                 created_at
-            ) values ($1, $2, $3, $4, $5, $6, $7)
+            ) values ($1, $2, $3, $4, $5, $6)
             returning id
         `
 
@@ -86,6 +87,7 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.title,
+                recipes.image,
                 recipes.ingredients,
                 recipes.preparation,
                 recipes.information
@@ -105,10 +107,10 @@ module.exports={
         const query = `
             update recipes set
                 chef_id = $2,
-                title = $4,
-                ingredients = $5,
-                preparation = $6,
-                information = $7
+                title = $3,
+                ingredients = $4,
+                preparation = $5,
+                information = $6
             where id = $1    
         `
         const values = [
@@ -141,7 +143,8 @@ module.exports={
             Select recipes.chef_id,
                 chefs.name as author,
                 recipes.id,
-                recipes.title
+                recipes.title,
+                recipes.image
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
             limit 6
