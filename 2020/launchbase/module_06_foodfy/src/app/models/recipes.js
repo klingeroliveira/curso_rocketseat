@@ -90,17 +90,13 @@ module.exports={
                 recipes.image,
                 recipes.ingredients,
                 recipes.preparation,
-                recipes.information
+                recipes.information                
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
             where recipes.id = $1
         `
 
-        db.query(query, [id], function(err, results){
-            if (err) throw(`Erro ao localizar Receita! ${err}`)
-
-            callback(results.rows[0])
-        })
+        return db.query(query, [id])
     },
 
     update(body, callback){
@@ -113,6 +109,7 @@ module.exports={
                 information = $6
             where id = $1    
         `
+
         const values = [
             parseInt(body.id),
             body.author,
@@ -122,11 +119,7 @@ module.exports={
             body.information
         ]
 
-        db.query(query, values, function(err){
-            if (err) throw(`Erro ao alterar Receita! ${err}`)
-
-            callback()
-        })
+        return db.query(query, values)
     },
 
     delete(id,callback){
@@ -154,5 +147,11 @@ module.exports={
 
             callback(results.rows)
         })
+    },
+
+    files(id){
+        return db.query(`
+            Select * from files where recipes_id = $1
+        `, [id])
     }
 }

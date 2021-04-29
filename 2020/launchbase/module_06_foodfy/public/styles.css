@@ -736,3 +736,53 @@ form .item #photos-preview img {
 #photos-preview .photo:hover i {
     opacity: 1;
 }
+
+
+/*** GALLERY RECIPE ***/
+
+.recipe .recipe-gallery {
+    margin-top: 56px;
+    
+}
+
+.recipe img{
+    width: 100%;
+}
+
+.recipe .highlight > img {
+
+    border-radius: 15px;
+    width: 940px;
+    height: 280px;
+
+    object-fit: cover;
+
+    border: 1px solid #efefef;
+
+    cursor: zoom-in;
+}
+
+.recipe .gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+
+    grid-gap: 2px;
+
+    direction: rtl;
+}
+
+.recipe .gallery-preview img{
+    width: 100px;
+    height: 100%;
+
+    opacity: 0.6;
+    object-fit: cover;
+
+    cursor: pointer;
+
+    transition: 200ms;
+}
+
+.recipe .gallery-preview img:hover{
+    opacity: 1;
+}

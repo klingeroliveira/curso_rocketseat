@@ -44,13 +44,11 @@ module.exports = {
         Recipes.all(params)
     },
 
-    showRecipeSite(req,res){
+    async showRecipeSite(req,res){
         
-        Recipes.find(req.params.index, function(recipe){
-            if (!recipe) return res.render("not-found");
+        const recipe = await Recipes.find(req.params.index)
 
-            return res.render("site/recipe-details", {item: recipe})
-        })
+        return res.render("site/recipe-details", {item: recipe.rows[0]})
     },
 
     index(req,res){
@@ -120,13 +118,22 @@ module.exports = {
         
     },
 
-    show(req, res) {
+    async show(req, res) {
         
-        Recipes.find(req.params.id, function(recipe){
-            if (!recipe) return res.send("Receita não encontrada!")
+        let results = Recipes.find(req.params.id)
+        const recipe = await results.rows[0]
 
-            return res.render("admin/recipes/show", {item: recipe})
-        })
+        if (!recipe) return res.send("Receita não encontrada!")
+
+        //get images
+        results = await Recipes.files(recipe.id)
+        const files = results.rows.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+        }))
+        
+        return res.render("admin/recipes/show", {item: recipe, files})
+        
 
     },
 
@@ -145,10 +152,14 @@ module.exports = {
 
         const keys = Object.keys(req.body)
         
-
+        
+        
         for (key of keys) {
-            console.log(key + req.body[key])
-            if (req.body[key] == "" && key != "removed_files")
+
+            if (req.body[key] == "" 
+                    && key != "removed_files" 
+                    && key != "button_salvar_edit"
+                    && key != "photos")
                 return res.send("Preencha todos os campos.")
         }
 
@@ -162,18 +173,17 @@ module.exports = {
             await Promise.all(removedFilesPromise)
         }
 
-
         if (req.files.length != 0){
 
             //validar se já não existem 6 imagens no total
 
-            const oldFiles = await Product.files(req.body.id)
+            const oldFiles = await Recipes.files(req.body.id)
             const totalFiles = oldFiles.rows.length + req.files.length
 
             if (totalFiles <= 6){
 
                 const newFilesPromise = req.files.map(file => 
-                    Files.create({...file, product_id: req.body.id}))
+                    Files.create({...file, recipes_id: req.body.id}))
 
                 await Promise.all(newFilesPromise)
             }
