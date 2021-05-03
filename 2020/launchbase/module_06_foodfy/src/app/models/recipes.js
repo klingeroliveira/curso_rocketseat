@@ -43,12 +43,8 @@ module.exports={
         })
     },
 
-    chefSelectedOptions(callback){
-        db.query(`Select * from chefs order by name`, function(err,results){
-            if (err) throw(`Erro ao listar Chefs para selecionar na Receita! ${err}`)
-
-            callback(results.rows)
-        })
+    chefSelectedOptions(){
+        return db.query(`Select * from chefs order by name`)
     },
 
     insert(body, callback){
@@ -81,7 +77,7 @@ module.exports={
 
     },
 
-    find(id, callback){
+    find(id){
         const query = `
             Select recipes.chef_id,
                 chefs.name as author,
@@ -95,7 +91,7 @@ module.exports={
                 inner join chefs on chefs.id = recipes.chef_id
             where recipes.id = $1
         `
-
+        
         return db.query(query, [id])
     },
 

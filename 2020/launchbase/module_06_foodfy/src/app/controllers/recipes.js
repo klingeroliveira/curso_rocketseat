@@ -46,9 +46,11 @@ module.exports = {
 
     async showRecipeSite(req,res){
         
-        const recipe = await Recipes.find(req.params.index)
+        const results = await Recipes.find(req.params.index) 
 
-        return res.render("site/recipe-details", {item: recipe.rows[0]})
+        const recipe = results.rows[0]
+
+        return res.render("site/recipe-details", {item: recipe})
     },
 
     index(req,res){
@@ -106,8 +108,6 @@ module.exports = {
         let results = await Recipes.create(req.body)
         const recipesId = results.rows[0].id
 
-        console.log(req.files)
-
         const filesPromise = req.files.map(file=>
             Files.create({...file, recipes_id: recipesId})
         )
@@ -120,32 +120,50 @@ module.exports = {
 
     async show(req, res) {
         
-        let results = Recipes.find(req.params.id)
-        const recipe = await results.rows[0]
+        let results = await Recipes.find(req.params.id)
+        const recipe = results.rows[0]
 
         if (!recipe) return res.send("Receita não encontrada!")
 
         //get images
         results = await Recipes.files(recipe.id)
-        const files = results.rows.map(file => ({
-            ...file,
-            src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-        }))
+        let files = ""
+
+        if (results.rows.length > 0){
+
+            files = results.rows.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+            }))
+        }
         
         return res.render("admin/recipes/show", {item: recipe, files})
-        
 
     },
 
-    edit(req, res) {
+    async edit(req, res) {
 
-        Recipes.find(req.params.id, function(recipe){
-            if (!recipe) return res.send("Receita não encontrada!")
+        let results = await Recipes.find(req.params.id)
+        const recipe = results.rows[0]
 
-            Recipes.chefSelectedOptions(function(chefs){
-                return res.render("admin/recipes/edit", {recipe, chefs} )        
-            })
-        })
+        if (!recipe) return res.send("Receita não encontrada!")
+
+        //get images
+        results = await Recipes.files(recipe.id)
+
+        let files = ""
+        
+        if (results.rows.length > 0){
+            files = results.rows.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+            }))
+        }
+
+        results = await Recipes.chefSelectedOptions()
+        const chefs = results.rows
+
+        return res.render("admin/recipes/edit", {recipe, chefs, files} )
     },
 
     async put(req,res) {
