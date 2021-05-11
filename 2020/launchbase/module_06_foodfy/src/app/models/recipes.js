@@ -147,7 +147,10 @@ module.exports={
 
     files(id){
         return db.query(`
-            Select * from files where recipes_id = $1
+            Select f.*
+            from files f
+            inner join recipe_files rf on rf.file_id = f.id
+                                        and rf.recipe_id = $1
         `, [id])
     }
 }

@@ -1,5 +1,5 @@
 const Recipes = require('../models/recipes')
-const Files = require('../models/Files')
+const Files = require('../models/files')
 
 module.exports = {
 
@@ -109,7 +109,7 @@ module.exports = {
         const recipesId = results.rows[0].id
 
         const filesPromise = req.files.map(file=>
-            Files.create({...file, recipes_id: recipesId})
+            Files.createRecipesFiles({...file, recipes_id: recipesId})
         )
 
         await Promise.all(filesPromise)
@@ -193,24 +193,29 @@ module.exports = {
 
         if (req.files.length != 0){
 
-            //validar se já não existem 6 imagens no total
+            //validar se já não existem 5 imagens no total
 
             const oldFiles = await Recipes.files(req.body.id)
             const totalFiles = oldFiles.rows.length + req.files.length
 
-            if (totalFiles <= 6){
+            if (totalFiles >= 1 && totalFiles <= 5){
 
                 const newFilesPromise = req.files.map(file => 
                     Files.create({...file, recipes_id: req.body.id}))
 
+                
                 await Promise.all(newFilesPromise)
+
             }
+            
+            await Recipes.update(req.body)
+
+            return res.redirect(`/admin/recipes/${req.body.id}`)
+        } else {
+            return res.send("Adicione pelo menos uma imagem!")
         }
 
-       
-        await Recipes.update(req.body)
-
-        return res.redirect(`/admin/recipes/${req.body.id}`)
+        
     },
 
     delete(req,res) {

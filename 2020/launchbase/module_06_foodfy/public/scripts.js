@@ -197,7 +197,7 @@ if (pagination) {
 //****** FOTOS UPLOAD */
 const PhotosUpload = {
     input: "",
-    uploadLimit: 6,
+    uploadLimit: 5,
     preview: document.querySelector('#photos-preview'),
     files: [],
 
