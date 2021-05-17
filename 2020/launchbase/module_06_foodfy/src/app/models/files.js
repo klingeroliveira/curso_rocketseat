@@ -23,37 +23,21 @@ module.exports = {
 
     },
 
-    async createRecipesFiles({ filename, path, recipes_id }) {
+    async createRecipeFiles({file_id, recipe_id}) {
+        
         try{
-            let query = `
-                INSERT INTO files(
-                    name,
-                    path
-                    )
-                VALUES ($1, $2)
-                RETURNING id
-            `
-
-            let values = [
-                filename,
-                path
-            ]
-
-            const result = await db.query(query, values)
-            const fileID = result.rows[0].id
-
-            query = `
+            
+            const query = `
                 INSERT INTO recipe_files(
                     file_id,
-                    recipe_id
+                    recipe_id)
                 VALUES($1, $2)
                 RETURNING id
-                )
             `
 
-            values = [
-                fileID,
-                recipes_id
+            const values = [
+                file_id,
+                recipe_id
             ]
 
             return db.query(query, values)

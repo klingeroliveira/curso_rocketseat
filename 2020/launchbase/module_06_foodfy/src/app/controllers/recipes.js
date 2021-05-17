@@ -201,10 +201,19 @@ module.exports = {
             if (totalFiles >= 1 && totalFiles <= 5){
 
                 const newFilesPromise = req.files.map(file => 
-                    Files.create({...file, recipes_id: req.body.id}))
+                    Files.create({...file}))
 
-                
+
                 await Promise.all(newFilesPromise)
+                .then( result => 
+                    {for (let index = 0; index < result.length; index++) {
+                        let element = result[index].rows;
+                        Files.createRecipeFiles({file_id: element[0].id, recipe_id: req.body.id})
+                    }
+                    }
+
+                    
+                    )
 
             }
             
