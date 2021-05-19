@@ -184,20 +184,25 @@ module.exports = {
         if(req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
             const lastIndex = removedFiles.length - 1
+
+            
             removedFiles.splice(lastIndex, 1)
 
-            const removedFilesPromise = removedFiles.map(id => Files.delete(id))
+            const removedFilesPromise = removedFiles.map(id => {
+               Files.delete(id)
+            })
 
             await Promise.all(removedFilesPromise)
         }
 
-        if (req.files.length != 0){
+        
+        //validar se já não existem 5 imagens no total
 
-            //validar se já não existem 5 imagens no total
-
-            const oldFiles = await Recipes.files(req.body.id)
-            const totalFiles = oldFiles.rows.length + req.files.length
-
+        const oldFiles = await Recipes.files(req.body.id)
+        const totalFiles = oldFiles.rows.length + req.files.length
+        
+        if (totalFiles != 0){
+            
             if (totalFiles >= 1 && totalFiles <= 5){
 
                 const newFilesPromise = req.files.map(file => 
@@ -205,21 +210,23 @@ module.exports = {
 
 
                 await Promise.all(newFilesPromise)
-                .then( result => 
-                    {for (let index = 0; index < result.length; index++) {
-                        let element = result[index].rows;
-                        Files.createRecipeFiles({file_id: element[0].id, recipe_id: req.body.id})
-                    }
-                    }
-
-                    
+                    .then(result => 
+                        {
+                            for (let index = 0; index < result.length; index++) {
+                                let element = result[index].rows;
+                                Files.createRecipeFiles({ file_id: element[0].id, recipe_id: req.body.id })
+                            }
+                        }
                     )
 
+                await Recipes.update(req.body)
+
+                return res.redirect(`/admin/recipes/${req.body.id}`)
+
+            } else {
+                return res.send("Máximo de 5 imagens!")    
             }
             
-            await Recipes.update(req.body)
-
-            return res.redirect(`/admin/recipes/${req.body.id}`)
         } else {
             return res.send("Adicione pelo menos uma imagem!")
         }

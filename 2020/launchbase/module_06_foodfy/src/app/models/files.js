@@ -56,7 +56,21 @@ module.exports = {
             fs.unlinkSync(file.path)
 
 
+            await this.deleteRecipeFiles(id)
+
             return db.query(`delete from files where id = $1`, [id])
+
+        } catch (err) {
+            console.error(err)
+        }
+
+    },
+
+    async deleteRecipeFiles(id){
+
+        try {
+
+            return db.query(`delete from recipe_files rf where rf.file_id = $1`, [id])
 
         } catch (err) {
             console.error(err)
