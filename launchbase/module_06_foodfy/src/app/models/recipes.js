@@ -28,7 +28,14 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.title,
-                recipes.image,
+
+                (select files.path 
+                   from recipe_files 
+					    inner join files on files.id = recipe_files.file_id
+				  where recipes.id = recipe_files.recipe_id
+				 order by files.id
+				 limit 1				) as image,
+                 
                 ${totalQuery}
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id

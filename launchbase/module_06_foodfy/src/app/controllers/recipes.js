@@ -75,11 +75,20 @@ module.exports = {
                 
                 if (filter) titleFind = `Buscando por "${filter}"`
 
-                return res.render("admin/recipes/index", {items: recipes, filter, pagination, titleFind})
+                
+                const newItens = recipes.map( recipes => ({
+                    ...recipes,
+                    src: `${req.protocol}://${req.headers.host}${recipes.image.replace("public","")}`
+                }))
+
+                return res.render("admin/recipes/index", {items: newItens, filter, pagination, titleFind})
             }
         }
 
+        
         Recipes.all(params)
+
+        
         /*
         Recipes.all('', function(recipes){
             return res.render("admin/recipes/index", { items: recipes } )
