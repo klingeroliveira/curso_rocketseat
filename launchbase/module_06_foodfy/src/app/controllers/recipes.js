@@ -6,7 +6,12 @@ module.exports = {
     indexSite(req,res){
 
         Recipes.listIndexSite(function (recipes) {
-            return res.render("site/home", { items: recipes })
+            const newItens = recipes.map( recipes => ({
+                ...recipes,
+                src: `${req.protocol}://${req.headers.host}${recipes.image.replace("public","")}`
+            }))
+
+            return res.render("site/home", { items: newItens })
         })
     },
 
@@ -37,7 +42,12 @@ module.exports = {
                 
                 if (filter) titleFind = `Buscando por "${filter}"`
 
-                return res.render("site/recipes", {items: recipes, filter, pagination, titleFind})
+                const newItens = recipes.map( recipes => ({
+                    ...recipes,
+                    src: `${req.protocol}://${req.headers.host}${recipes.image.replace("public","")}`
+                }))
+
+                return res.render("site/recipes", {items: newItens, filter, pagination, titleFind})
             }
         }
 
@@ -46,11 +56,23 @@ module.exports = {
 
     async showRecipeSite(req,res){
         
-        const results = await Recipes.find(req.params.index) 
+        let results = await Recipes.find(req.params.index) 
 
         const recipe = results.rows[0]
 
-        return res.render("site/recipe-details", {item: recipe})
+         //get images
+         results = await Recipes.files(recipe.id)
+         let files = ""
+ 
+         if (results.rows.length > 0){
+ 
+             files = results.rows.map(file => ({
+                 ...file,
+                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+             }))
+         }
+
+        return res.render("site/recipe-details", {item: recipe, files})
     },
 
     index(req,res){
@@ -87,12 +109,6 @@ module.exports = {
 
         
         Recipes.all(params)
-
-        
-        /*
-        Recipes.all('', function(recipes){
-            return res.render("admin/recipes/index", { items: recipes } )
-        })*/
     },
 
     create(req,res){

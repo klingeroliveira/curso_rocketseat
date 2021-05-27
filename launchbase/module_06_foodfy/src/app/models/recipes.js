@@ -90,7 +90,12 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.title,
-                recipes.image,
+                (select files.path 
+                    from recipe_files 
+                         inner join files on files.id = recipe_files.file_id
+                   where recipes.id = recipe_files.recipe_id
+                  order by files.id
+                  limit 1				) as image,
                 recipes.ingredients,
                 recipes.preparation,
                 recipes.information                
@@ -140,11 +145,17 @@ module.exports={
                 chefs.name as author,
                 recipes.id,
                 recipes.title,
-                recipes.image
+                (select files.path 
+                    from recipe_files 
+                         inner join files on files.id = recipe_files.file_id
+                   where recipes.id = recipe_files.recipe_id
+                  order by files.id
+                  limit 1				) as image
             from recipes
                 inner join chefs on chefs.id = recipes.chef_id
             limit 6
         `
+
         db.query(query, function(err,results){
             if (err) throw(`Erro ao listar Receitas! ${err}`)
 
