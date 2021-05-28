@@ -2,8 +2,9 @@ const cards = document.querySelectorAll('.card');
 const detailsRecipe = document.querySelectorAll('a.expandDetails');
 const formEditChef = document.querySelector('#formEditChef');
 const formEditRecipe = document.querySelector('#formEditRecipe');
-const paginaAtual = location.pathname
-const menuItens = document.querySelectorAll("header .menu a")
+const paginaAtual = location.pathname;
+const menuItens = document.querySelectorAll('header .menu a');
+// const avatarChef = document.querySelector('.form_chef .dados .item .button, .form_chef .dados .item input.avatar_url')
 
 for (let card of cards) {
     card.addEventListener("click", function () {
@@ -20,18 +21,18 @@ for (let detailRecipe of detailsRecipe) {
 
         if (detailRecipe.getAttribute('name') == "top_ingredients") {
             const ingredients = document.querySelector('div[name=ingredients]');
-            hidden(detailRecipe,ingredients);
+            hiddenDetailsRecipe(detailRecipe,ingredients);
         } else if (detailRecipe.getAttribute('name') == "top_preparation") {
             const preparation = document.querySelector('div[name=preparation]');
-            hidden(detailRecipe,preparation);
+            hiddenDetailsRecipe(detailRecipe,preparation);
         } else if (detailRecipe.getAttribute('name') == "top_information") {
             const information = document.querySelector('div[name=information]');
-            hidden(detailRecipe,information);
+            hiddenDetailsRecipe(detailRecipe,information);
         }
     })
 }
 
-function hidden(name,content){
+function hiddenDetailsRecipe(name,content){
     if (name.textContent == "MOSTRAR"){
         content.removeAttribute('hidden');
         name.textContent = "ESCONDER";

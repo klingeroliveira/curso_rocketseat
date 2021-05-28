@@ -409,7 +409,8 @@ h3 {
 }
 
 .cabecalho .button,
-.menu_find_recipes .button {
+.menu_find_recipes .button,
+.form_chef .dados .item .button{
     background-color: var(--collor-background-button);
     height: 37px;
     border-radius: 4px;
@@ -423,7 +424,8 @@ h3 {
     line-height: 37px;
 }
 
-.cabecalho .button{
+.cabecalho .button,
+.form_chef .dados .item .button{
     width: 139px;
 }
 
