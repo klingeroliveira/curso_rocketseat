@@ -839,3 +839,27 @@ form .item #photos-preview img {
 
     transition: 400ms;
 }
+
+
+/*===ADMIN CHEF===*/
+
+/* PHOTOS UPLOAD */
+.form_chef #photo-upload-chef{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 139px;
+}
+
+.form_chef #photo-input-chef{
+    position:absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0;
+    cursor: pointer;
+}

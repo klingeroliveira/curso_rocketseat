@@ -4,7 +4,7 @@ const formEditChef = document.querySelector('#formEditChef');
 const formEditRecipe = document.querySelector('#formEditRecipe');
 const paginaAtual = location.pathname;
 const menuItens = document.querySelectorAll('header .menu a');
-// const avatarChef = document.querySelector('.form_chef .dados .item .button, .form_chef .dados .item input.avatar_url')
+
 
 for (let card of cards) {
     card.addEventListener("click", function () {
@@ -202,9 +202,12 @@ const PhotosUpload = {
     preview: document.querySelector('#photos-preview'),
     files: [],
 
+    
+
     handleFileInput(event) {
         const { files: fileList } = event.target
         PhotosUpload.input = event.target
+
 
         if (PhotosUpload.hasLimit(event)) {
             PhotosUpload.updateInputFiles()
@@ -222,8 +225,10 @@ const PhotosUpload = {
                 const image = new Image()
                 image.src = String(reader.result)
 
+                
                 const div = PhotosUpload.getContainer(image)
                 PhotosUpload.preview.appendChild(div)
+                
             }
 
             reader.readAsDataURL(file)
@@ -356,4 +361,8 @@ const ImageGallery = {
         ImageGallery.highlight.src = target.src
         LightBox.image.src = target.src
     }
+}
+
+if (formEditChef) {
+    document.querySelector('.avatar_url').removeAttribute('hidden')
 }

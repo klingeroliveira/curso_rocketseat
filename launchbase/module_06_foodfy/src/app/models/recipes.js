@@ -51,6 +51,7 @@ module.exports={
     },
 
     chefSelectedOptions(){
+        
         return db.query(`Select * from chefs order by name`)
     },
 

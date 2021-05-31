@@ -111,10 +111,11 @@ module.exports = {
         Recipes.all(params)
     },
 
-    create(req,res){
-        Recipes.chefSelectedOptions(function(chefs){
-            return res.render("admin/recipes/create", {chefs})
-        })
+    async create(req,res){
+        
+        const chefs = await Recipes.chefSelectedOptions()
+        
+        return res.render("admin/recipes/create", {chefs: chefs.rows})
     },
 
     async post(req,res) {
