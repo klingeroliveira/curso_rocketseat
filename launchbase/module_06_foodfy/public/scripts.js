@@ -366,3 +366,55 @@ const ImageGallery = {
 if (formEditChef) {
     document.querySelector('.avatar_url').removeAttribute('hidden')
 }
+
+//****** AVATAR UPLOAD CHEF */
+const PhotoUploadChef = {
+    input: "",
+    uploadLimit: 1,
+    files: [],
+
+    
+
+    handleFileInput(event) {
+        const { files: fileList } = event.target
+        PhotoUploadChef.input = event.target
+
+        console.log(PhotoUploadChef.input)
+
+        if (PhotoUploadChef.hasLimit(event)) {
+            return
+        }
+        
+
+        Array.from(fileList).forEach(file => {
+
+            PhotoUploadChef.files.push(file)
+
+            const reader = new FileReader()
+
+            reader.onload = () => {
+                const image = new Image()
+                image.src = String(reader.result)
+ 
+            }
+
+            reader.readAsDataURL(file)
+        })
+
+    },
+
+    hasLimit(event){
+        const { uploadLimit, input } = PhotoUploadChef
+        const { files: fileList } = input
+
+        if (fileList.length > uploadLimit) {
+            alert(`Envie no máximo ${uploadLimit} fotos!`)
+            event.preventDefault()
+            return true
+        }
+
+        return false
+    }
+
+}
+//****** */

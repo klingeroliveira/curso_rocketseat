@@ -123,22 +123,35 @@ module.exports = {
         const keys = Object.keys(req.body)
 
         for (key of keys) {
-            if(req.body[key] == "")
-                return res.send("Preencha todos os campos!")
+
+            if (req.body[key] == "" 
+                    && key != "removed_files" 
+                    && key != "button_salvar_edit"
+                    && key != "photos")
+                return res.send("Preencha todos os campos.")
         }
 
         if(req.files.length == 0){
             return res.send("Envie pelo menos uma imagem.")
         }
 
+        //grava receita
         let results = await Recipes.create(req.body)
-        const recipesId = results.rows[0].id
+        const recipe_id = results.rows[0].id
 
+        //grava imagens
         const filesPromise = req.files.map(file=>
-            Files.createRecipesFiles({...file, recipes_id: recipesId})
-        )
+            Files.create({...file}))
 
+        //grava imagens x receita
         await Promise.all(filesPromise)
+            .then(result =>
+                {
+                    for (let index = 0; index < result.length; index++){
+                        let element = result[index].rows;
+                        Files.createRecipeFiles({ file_id: element[0].id, recipe_id })
+                    }
+                })
 
         return res.redirect(`/admin/recipes/${id}`)
         
@@ -227,37 +240,34 @@ module.exports = {
         const oldFiles = await Recipes.files(req.body.id)
         const totalFiles = oldFiles.rows.length + req.files.length
         
-        if (totalFiles != 0){
-            
-            if (totalFiles >= 1 && totalFiles <= 5){
-
-                const newFilesPromise = req.files.map(file => 
-                    Files.create({...file}))
-
-
-                await Promise.all(newFilesPromise)
-                    .then(result => 
-                        {
-                            for (let index = 0; index < result.length; index++) {
-                                let element = result[index].rows;
-                                Files.createRecipeFiles({ file_id: element[0].id, recipe_id: req.body.id })
-                            }
-                        }
-                    )
-
-                await Recipes.update(req.body)
-
-                return res.redirect(`/admin/recipes/${req.body.id}`)
-
-            } else {
-                return res.send("Máximo de 5 imagens!")    
-            }
-            
-        } else {
+        if (totalFiles == 0){
             return res.send("Adicione pelo menos uma imagem!")
         }
+            
+        if (totalFiles >= 5){
+            return res.send("Máximo de 5 imagens!")    
+        }
 
-        
+        //grava imagens
+        const newFilesPromise = req.files.map(file => 
+            Files.create({...file}))
+
+
+        //grava imagens x receita
+        await Promise.all(newFilesPromise)
+            .then(result => 
+                {
+                    for (let index = 0; index < result.length; index++) {
+                        let element = result[index].rows;
+                        Files.createRecipeFiles({ file_id: element[0].id, recipe_id: req.body.id })
+                    }
+                }
+            )
+
+        await Recipes.update(req.body)
+
+        return res.redirect(`/admin/recipes/${req.body.id}`)
+
     },
 
     delete(req,res) {
