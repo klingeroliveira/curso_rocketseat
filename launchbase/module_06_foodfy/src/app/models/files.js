@@ -1,6 +1,7 @@
 const { query } = require('../../config/db')
 const db = require('../../config/db')
 const fs = require('fs')
+const { all } = require('./recipes')
 
 module.exports = {
     create({ filename, path }) {
@@ -56,25 +57,30 @@ module.exports = {
             fs.unlinkSync(file.path)
 
 
-            await this.deleteRecipeFiles(id)
+          //  await this.deleteRecipeFiles(id)
 
             return db.query(`delete from files where id = $1`, [id])
 
         } catch (err) {
             console.error(err)
         }
+    }
+    
+    
+    /*,
 
-    },
-
-    async deleteRecipeFiles(id){
+    async deleteRecipeEfiles(recipe_id){
 
         try {
 
-            return db.query(`delete from recipe_files rf where rf.file_id = $1`, [id])
+            const result = await db.query(`select * from recipe_files rf where rf.recipe_id = $1`, [recipe_id])
+            const file = result.rows
+
+            return db.query(`delete from file where  `)
 
         } catch (err) {
             console.error(err)
         }
 
-    }
+    }*/
 }

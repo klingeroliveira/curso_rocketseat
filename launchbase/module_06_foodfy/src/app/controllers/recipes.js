@@ -136,7 +136,7 @@ module.exports = {
         }
 
         //grava receita
-        let results = await Recipes.create(req.body)
+        let results = await Recipes.insert(req.body)
         const recipe_id = results.rows[0].id
 
         //grava imagens
@@ -153,7 +153,7 @@ module.exports = {
                     }
                 })
 
-        return res.redirect(`/admin/recipes/${id}`)
+        return res.redirect(`/admin/recipes/${recipe_id}`)
         
     },
 
@@ -270,10 +270,22 @@ module.exports = {
 
     },
 
-    delete(req,res) {
+    async delete(req,res) {
+
+        // await Recipes.delete(recipes_id)
+
+        const results = await Recipes.files(req.body.id)
+
+        console.log(req.body)
         
-        Recipes.delete(req.body.id, function(){
-            return res.redirect("/admin/recipes")
+        const newResultPromisse = results.rows.map(files => {
+            console.log({...files.file_id})
+            //Files.delete({...files.file_id})
         })
+
+        await Promise.all(newResultPromisse)
+
+        return res.redirect("/admin/recipes")
+        
     }
 }

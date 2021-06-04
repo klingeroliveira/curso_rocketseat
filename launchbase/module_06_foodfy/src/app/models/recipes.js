@@ -77,12 +77,7 @@ module.exports={
             date(Date.now()).iso
         ]
 
-        db.query(query, values, function(err, results){
-            if (err) throw(`Erro ao cadastrar Receita! ${err}`)
-
-            callback(results.rows[0].id)
-        })
-
+        return db.query(query, values)
     },
 
     find(id){
@@ -131,12 +126,14 @@ module.exports={
         return db.query(query, values)
     },
 
-    delete(id,callback){
-        db.query(`delete from recipes where id = $1`, [id], function(err){
-            if (err) throw(`Erro ao deletar Receita! ${err}`)
-
-            callback()
-        })
+    delete(id){
+        try {
+            return db.query(`delete from recipes where id = $1`, [id])
+        
+        } catch (err){
+            console.error(`Erro ao deletar Receita! ${err}`)
+        }       
+        
     },
 
     listIndexSite(callback){
@@ -165,11 +162,17 @@ module.exports={
     },
 
     files(id){
-        return db.query(`
+
+        try{
+            return db.query(`
             Select f.*
             from files f
             inner join recipe_files rf on rf.file_id = f.id
                                         and rf.recipe_id = $1
         `, [id])
+        } catch (err){
+            console.error(err)
+        }
+        
     }
 }
