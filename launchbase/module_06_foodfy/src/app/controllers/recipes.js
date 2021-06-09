@@ -209,10 +209,8 @@ module.exports = {
 
         const keys = Object.keys(req.body)
         
-        
-        
         for (key of keys) {
-
+            
             if (req.body[key] == "" 
                     && key != "removed_files" 
                     && key != "button_salvar_edit"
@@ -228,7 +226,7 @@ module.exports = {
             removedFiles.splice(lastIndex, 1)
 
             const removedFilesPromise = removedFiles.map(id => {
-               Files.delete(id)
+               Files.delete({id: id})
             })
 
             await Promise.all(removedFilesPromise)
@@ -236,7 +234,6 @@ module.exports = {
 
         
         //validar se já não existem 5 imagens no total
-
         const oldFiles = await Recipes.files(req.body.id)
         const totalFiles = oldFiles.rows.length + req.files.length
         
@@ -244,25 +241,27 @@ module.exports = {
             return res.send("Adicione pelo menos uma imagem!")
         }
             
-        if (totalFiles >= 5){
+        if (totalFiles > 5){
             return res.send("Máximo de 5 imagens!")    
         }
 
-        //grava imagens
-        const newFilesPromise = req.files.map(file => 
-            Files.create({...file}))
+        if (req.files.length > 0){
+            //grava imagens
+            const newFilesPromise = req.files.map(file => 
+                Files.create({...file}))
 
 
-        //grava imagens x receita
-        await Promise.all(newFilesPromise)
-            .then(result => 
-                {
-                    for (let index = 0; index < result.length; index++) {
-                        let element = result[index].rows;
-                        Files.createRecipeFiles({ file_id: element[0].id, recipe_id: req.body.id })
+            //grava imagens x receita
+            await Promise.all(newFilesPromise)
+                .then(result => 
+                    {
+                        for (let index = 0; index < result.length; index++) {
+                            let element = result[index].rows;
+                            Files.createRecipeFiles({ file_id: element[0].id, recipe_id: req.body.id })
+                        }
                     }
-                }
-            )
+                )
+        }
 
         await Recipes.update(req.body)
 
@@ -272,19 +271,18 @@ module.exports = {
 
     async delete(req,res) {
 
-        // await Recipes.delete(recipes_id)
-
         const results = await Recipes.files(req.body.id)
-
-        console.log(req.body)
         
         const newResultPromisse = results.rows.map(files => {
-            console.log({...files.file_id})
-            //Files.delete({...files.file_id})
+            Files.delete({...files})
         })
 
         await Promise.all(newResultPromisse)
-
+        .then( () => 
+            {
+                Recipes.delete(req.body.id)
+            })
+           
         return res.redirect("/admin/recipes")
         
     }

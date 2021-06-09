@@ -48,7 +48,7 @@ module.exports = {
         }
     },
 
-    async delete(id) {
+    async delete({id}) {
 
         try {
             const result = await db.query(`Select * from files where id = $1`, [id])

@@ -83,7 +83,7 @@ if (passoapasso){
 
 
 //inclusão metodo para form edit e delete
-const button_salvar_edit = document.querySelector("button[name=button_salvar_edit]")
+/*const button_salvar_edit = document.querySelector("button[name=button_salvar_edit]")
 const button_delete_edit = document.querySelector("button[name=button_delete_edit]")
 
 if (button_salvar_edit){
@@ -106,7 +106,7 @@ if (button_delete_edit){
     button_delete_edit.addEventListener("click", function(){
     
         if (formEditChef){
-    
+
             formEditChef.setAttribute("action", "/admin/chefs?_method=DELETE")
     
         } else if (formEditRecipe){
